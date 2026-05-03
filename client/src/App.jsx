@@ -8,6 +8,7 @@ import DashboardLayout from './components/layout/DashboardLayout'
 // Auth pages
 import Login from './pages/auth/Login'
 import Register from './pages/auth/Register'
+import VerifyEmail from './pages/auth/VerifyEmail'
 
 // Student pages
 import StudentDashboard from './pages/student/Dashboard'
@@ -54,6 +55,7 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
+              <Route path="/verify-email" element={<VerifyEmail />} />
 
               {/* Student routes */}
               <Route path="/student" element={<ProtectedRoute role="student"><DashboardLayout /></ProtectedRoute>}>

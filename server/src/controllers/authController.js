@@ -1,8 +1,10 @@
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
 const User = require('../models/User');
 const Badge = require('../models/Badge');
 const { checkAndAwardBadges } = require('../services/badgeService');
-const { sendWelcomeEmail } = require('../services/emailService');
+const { sendWelcomeEmail, sendVerificationEmail } = require('../services/emailService');
+const { generateVerificationToken, getTokenExpiry } = require('../utils/tokenUtils');
 
 const generateToken = (id) => {
   return jwt.sign({ id }, process.env.JWT_SECRET || 'secret', {
@@ -20,16 +22,29 @@ const register = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Email already registered' });
     }
     const safeRole = ['student', 'educator'].includes(role) ? role : 'student';
-    const user = await User.create({ name, email, password, role: safeRole });
-    try { await sendWelcomeEmail(user); } catch (_) {}
+    const user = await User.create({ name, email, password, role: safeRole, emailVerified: false });
+
+    // Generate email verification token
+    const { token: verificationToken, hashedToken } = generateVerificationToken();
+    user.emailVerificationToken = hashedToken;
+    user.emailVerificationExpire = getTokenExpiry(24);
+    await user.save();
+
+    // Send verification email
+    try {
+      await sendVerificationEmail(user, verificationToken);
+    } catch (_) {}
+
     const token = generateToken(user._id);
     res.status(201).json({
       success: true,
+      message: 'Registration successful. Please verify your email.',
       token,
       user: {
         _id: user._id, name: user.name, email: user.email,
         role: user.role, xp: user.xp, level: user.level,
         points: user.points, streak: user.streak, avatar: user.avatar,
+        emailVerified: user.emailVerified,
       },
     });
   } catch (error) {
@@ -149,4 +164,116 @@ const refreshToken = async (req, res) => {
   }
 };
 
-module.exports = { register, login, getMe, updateProfile, changePassword, refreshToken };
+// @desc Verify email
+// @route GET /api/auth/verify-email/:token
+const verifyEmail = async (req, res) => {
+  try {
+    const { token } = req.params;
+
+    // Hash the token to match what's in database
+    const hashedToken = crypto.createHash('sha256').update(token).digest('hex');
+
+    const user = await User.findOne({
+      emailVerificationToken: hashedToken,
+      emailVerificationExpire: { $gt: Date.now() },
+    });
+
+    if (!user) {
+      return res.status(400).json({
+        success: false,
+        message: 'Invalid or expired verification token',
+      });
+    }
+
+    if (user.emailVerified) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email already verified',
+      });
+    }
+
+    user.emailVerified = true;
+    user.emailVerificationToken = undefined;
+    user.emailVerificationExpire = undefined;
+    await user.save();
+
+    // Send welcome email after verification
+    try {
+      await sendWelcomeEmail(user);
+    } catch (_) {}
+
+    res.json({
+      success: true,
+      message: 'Email verified successfully. Welcome to GLearnPlatform!',
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+// @desc Resend verification email
+// @route POST /api/auth/resend-verification
+const resendVerification = async (req, res) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email is required',
+      });
+    }
+
+    const user = await User.findOne({ email });
+
+    if (!user) {
+      return res.status(404).json({
+        success: false,
+        message: 'User not found',
+      });
+    }
+
+    if (user.emailVerified) {
+      return res.status(400).json({
+        success: false,
+        message: 'Email already verified',
+      });
+    }
+
+    // Check rate limiting - can resend only once per 5 minutes
+    if (user.emailVerificationExpire) {
+      const timeDiff = new Date() - new Date(user.emailVerificationExpire - 24 * 60 * 60 * 1000);
+      if (timeDiff < 5 * 60 * 1000) {
+        return res.status(429).json({
+          success: false,
+          message: 'Please wait before requesting another verification email',
+        });
+      }
+    }
+
+    // Generate new verification token
+    const { token: verificationToken, hashedToken } = generateVerificationToken();
+    user.emailVerificationToken = hashedToken;
+    user.emailVerificationExpire = getTokenExpiry(24);
+    await user.save();
+
+    // Send verification email
+    try {
+      await sendVerificationEmail(user, verificationToken);
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Failed to send verification email',
+      });
+    }
+
+    res.json({
+      success: true,
+      message: 'Verification email sent successfully',
+    });
+  } catch (error) {
+    res.status(500).json({ success: false, message: error.message });
+  }
+};
+
+module.exports = { register, login, getMe, updateProfile, changePassword, refreshToken, verifyEmail, resendVerification };
