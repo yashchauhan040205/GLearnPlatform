@@ -2,18 +2,22 @@ const nodemailer = require('nodemailer');
 
 const createTransporter = () => {
   return nodemailer.createTransport({
-    host: process.env.SMTP_HOST || 'smtp.gmail.com',
-    port: process.env.SMTP_PORT || 587,
+    host: process.env.SMTP_HOST || process.env.EMAIL_HOST || 'smtp.gmail.com',
+    port: process.env.SMTP_PORT || process.env.EMAIL_PORT || 587,
     secure: false,
-    auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    auth: {
+      user: process.env.SMTP_USER || process.env.EMAIL_USER,
+      pass: process.env.SMTP_PASS || process.env.EMAIL_PASSWORD
+    },
   });
 };
 
 const sendWelcomeEmail = async (user) => {
-  if (!process.env.SMTP_USER) return;
+  const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+  if (!smtpUser) return;
   const transporter = createTransporter();
   await transporter.sendMail({
-    from: `"GLearnPlatform" <${process.env.SMTP_USER}>`,
+    from: `"GLearnPlatform" <${smtpUser}>`,
     to: user.email,
     subject: '🎮 Welcome to GLearnPlatform - Start Your Learning Journey!',
     html: `
@@ -36,10 +40,11 @@ const sendWelcomeEmail = async (user) => {
 };
 
 const sendBadgeEmail = async (user, badge) => {
-  if (!process.env.SMTP_USER) return;
+  const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+  if (!smtpUser) return;
   const transporter = createTransporter();
   await transporter.sendMail({
-    from: `"GLearnPlatform" <${process.env.SMTP_USER}>`,
+    from: `"GLearnPlatform" <${smtpUser}>`,
     to: user.email,
     subject: `🏆 You earned the "${badge.name}" badge!`,
     html: `
@@ -55,12 +60,13 @@ const sendBadgeEmail = async (user, badge) => {
 };
 
 const sendVerificationEmail = async (user, token) => {
-  if (!process.env.SMTP_USER) return;
+  const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
+  if (!smtpUser) return;
   const transporter = createTransporter();
   const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${token}`;
 
   await transporter.sendMail({
-    from: `"GLearnPlatform" <${process.env.SMTP_USER}>`,
+    from: `"GLearnPlatform" <${smtpUser}>`,
     to: user.email,
     subject: '📧 Verify Your Email - GLearnPlatform',
     html: `

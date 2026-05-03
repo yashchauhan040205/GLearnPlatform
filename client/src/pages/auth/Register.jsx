@@ -21,7 +21,8 @@ const Register = () => {
     try {
       const user = await register(form.name, form.email, form.password, form.role)
       if (user) {
-        navigate(`/${user.role}`, { replace: true })
+        toast.success('Account created! Please verify your email to continue.')
+        navigate(`/verify-email?email=${form.email}`, { replace: true })
       }
     } catch {
       // Error toast is already shown by the API interceptor

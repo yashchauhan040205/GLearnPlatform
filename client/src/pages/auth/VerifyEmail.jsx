@@ -119,16 +119,20 @@ const VerifyEmail = () => {
             <div className="space-y-4">
               <div className="text-center space-y-4">
                 <div className="flex justify-center">
-                  <XCircle className="w-12 h-12 text-red-500" />
+                  <XCircle className="w-12 h-12 text-amber-500" />
                 </div>
-                <h2 className="text-lg font-semibold text-dark-100">Verification Failed</h2>
-                <p className="text-dark-400 text-sm">{message}</p>
+                <h2 className="text-lg font-semibold text-dark-100">
+                  {emailParam ? '📧 Verify Your Email' : 'Verification Failed'}
+                </h2>
+                <p className="text-dark-400 text-sm">
+                  {emailParam ? 'Check your email for the verification link. If you don\'t see it, request a new one below.' : message}
+                </p>
               </div>
 
               {/* Resend Form */}
-              {showResend && (
+              {showResend || emailParam ? (
                 <form onSubmit={handleResendEmail} className="mt-6 space-y-3 border-t border-dark-800 pt-6">
-                  <p className="text-dark-400 text-sm text-center">Request a new verification email</p>
+                  <p className="text-dark-400 text-sm text-center">Request verification email</p>
                   <div>
                     <label className="label">Email Address</label>
                     <div className="relative">
@@ -148,17 +152,17 @@ const VerifyEmail = () => {
                     disabled={resendLoading}
                     className="w-full btn btn-primary disabled:opacity-50"
                   >
-                    {resendLoading ? 'Sending...' : 'Resend Verification Email'}
+                    {resendLoading ? 'Sending...' : 'Send Verification Email'}
                   </button>
                 </form>
-              )}
+              ) : null}
 
               {/* Back to Login */}
               <div className="text-center">
                 <p className="text-dark-400 text-sm">
-                  Remember your password?{' '}
+                  Already verified?{' '}
                   <Link to="/login" className="text-primary-600 hover:text-primary-500 font-semibold">
-                    Sign in
+                    Sign in here
                   </Link>
                 </p>
               </div>
