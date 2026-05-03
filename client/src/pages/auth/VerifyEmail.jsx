@@ -8,16 +8,24 @@ const VerifyEmail = () => {
   const [searchParams] = useSearchParams()
   const navigate = useNavigate()
   const token = searchParams.get('token')
+  const emailParam = searchParams.get('email')
   const [status, setStatus] = useState('loading') // loading, success, error
   const [message, setMessage] = useState('')
-  const [email, setEmail] = useState('')
+  const [email, setEmail] = useState(emailParam || '')
   const [showResend, setShowResend] = useState(false)
   const [resendLoading, setResendLoading] = useState(false)
 
   useEffect(() => {
     if (!token) {
-      setStatus('error')
-      setMessage('No verification token provided')
+      // If no token but email provided, show resend form
+      if (emailParam) {
+        setStatus('error')
+        setMessage('Verification required to continue')
+        setShowResend(true)
+      } else {
+        setStatus('error')
+        setMessage('No verification token provided')
+      }
       return
     }
 
@@ -37,7 +45,7 @@ const VerifyEmail = () => {
     }
 
     verifyEmail()
-  }, [token, navigate])
+  }, [token, emailParam, navigate])
 
   const handleResendEmail = async (e) => {
     e.preventDefault()

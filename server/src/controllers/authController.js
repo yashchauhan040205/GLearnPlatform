@@ -64,17 +64,25 @@ const login = async (req, res) => {
     if (!user.isActive) {
       return res.status(401).json({ success: false, message: 'Account is deactivated' });
     }
+    if (!user.emailVerified) {
+      return res.status(403).json({
+        success: false,
+        message: 'Please verify your email before logging in',
+        email: user.email,
+        code: 'EMAIL_NOT_VERIFIED'
+      });
+    }
     // Update streak and check for badges
     user.updateStreak();
     user.calculateLevel();
     await user.save();
-    
+
     // Check and award any new badges
     const newBadges = await checkAndAwardBadges(user);
-    
+
     // Generate a fresh token for each login
     const token = generateToken(user._id);
-    
+
     res.json({
       success: true,
       token,

@@ -21,7 +21,13 @@ const Login = () => {
       const user = await login(form.email, form.password)
       navigate(`/${user.role}`)
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Invalid email or password')
+      const errorData = err.response?.data
+      if (errorData?.code === 'EMAIL_NOT_VERIFIED') {
+        toast.error('Please verify your email first')
+        navigate(`/verify-email?email=${form.email}`)
+      } else {
+        toast.error(errorData?.message || 'Invalid email or password')
+      }
     } finally {
       setLoading(false)
     }
