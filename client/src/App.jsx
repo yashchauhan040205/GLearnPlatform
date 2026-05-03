@@ -20,18 +20,18 @@ import Badges from './pages/student/Badges'
 import Profile from './pages/student/Profile'
 import Discussions from './pages/student/Discussions'
 
-// Educator pages
+// Educator pages (view-only, no creation)
 import EducatorDashboard from './pages/educator/Dashboard'
 import ManageCourses from './pages/educator/ManageCourses'
-import CourseEditor from './pages/educator/CourseEditor'
-import LessonEditor from './pages/educator/LessonEditor'
-import QuizEditor from './pages/educator/QuizEditor'
 import StudentInsights from './pages/educator/StudentInsights'
 
 // Admin pages
 import AdminDashboard from './pages/admin/Dashboard'
 import ManageUsers from './pages/admin/ManageUsers'
 import AdminCourses from './pages/admin/AdminCourses'
+import AdminCourseEditor from './pages/admin/CourseEditor'
+import AdminLessonEditor from './pages/admin/LessonEditor'
+import AdminQuizEditor from './pages/admin/QuizEditor'
 
 import LandingPage from './pages/LandingPage'
 
@@ -44,9 +44,9 @@ function App() {
             <Toaster
               position="top-right"
               toastOptions={{
-                style: { background: '#1e293b', color: '#e2e8f0', border: '1px solid #334155' },
-                success: { iconTheme: { primary: '#10b981', secondary: '#1e293b' } },
-                error: { iconTheme: { primary: '#ef4444', secondary: '#1e293b' } },
+                style: { background: '#fff', color: '#212529', border: '1px solid #dee2e6', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' },
+                success: { iconTheme: { primary: '#2f9e44', secondary: '#fff' } },
+                error: { iconTheme: { primary: '#e03131', secondary: '#fff' } },
               }}
             />
             <Routes>
@@ -68,23 +68,28 @@ function App() {
                 <Route path="discussions/:courseId" element={<Discussions />} />
               </Route>
 
-              {/* Educator routes */}
+              {/* Educator routes (can now create/edit/delete their own courses) */}
               <Route path="/educator" element={<ProtectedRoute role="educator"><DashboardLayout /></ProtectedRoute>}>
                 <Route index element={<EducatorDashboard />} />
                 <Route path="courses" element={<ManageCourses />} />
-                <Route path="courses/new" element={<CourseEditor />} />
-                <Route path="courses/:id/edit" element={<CourseEditor />} />
-                <Route path="courses/:courseId/lessons/new" element={<LessonEditor />} />
-                <Route path="lessons/:id/edit" element={<LessonEditor />} />
-                <Route path="courses/:courseId/quiz/new" element={<QuizEditor />} />
+                <Route path="courses/new" element={<AdminCourseEditor />} />
+                <Route path="courses/:id/edit" element={<AdminCourseEditor />} />
+                <Route path="courses/:courseId/lessons/new" element={<AdminLessonEditor />} />
+                <Route path="lessons/:id/edit" element={<AdminLessonEditor />} />
+                <Route path="courses/:courseId/quiz/new" element={<AdminQuizEditor />} />
                 <Route path="insights" element={<StudentInsights />} />
               </Route>
 
-              {/* Admin routes */}
+              {/* Admin routes (full control — create, edit, delete courses/quizzes/lessons) */}
               <Route path="/admin" element={<ProtectedRoute role="admin"><DashboardLayout /></ProtectedRoute>}>
                 <Route index element={<AdminDashboard />} />
                 <Route path="users" element={<ManageUsers />} />
                 <Route path="courses" element={<AdminCourses />} />
+                <Route path="courses/new" element={<AdminCourseEditor />} />
+                <Route path="courses/:id/edit" element={<AdminCourseEditor />} />
+                <Route path="courses/:courseId/lessons/new" element={<AdminLessonEditor />} />
+                <Route path="lessons/:id/edit" element={<AdminLessonEditor />} />
+                <Route path="courses/:courseId/quiz/new" element={<AdminQuizEditor />} />
               </Route>
 
               {/* Catch all */}

@@ -72,7 +72,7 @@ const ManageUsers = () => {
         <div className="flex gap-2">
           {['all', ...ROLES].map(r => (
             <button key={r} onClick={() => { setRoleFilter(r); setPage(1) }}
-              className={`px-3 py-2 rounded-xl text-sm capitalize transition-all ${roleFilter === r ? 'bg-primary-600 text-white' : 'bg-dark-800 text-dark-400 border border-dark-700 hover:text-white'}`}>
+              className={`px-3 py-2 rounded-xl text-sm capitalize transition-all ${roleFilter === r ? 'bg-primary-600 text-white' : 'bg-dark-900 text-dark-400 border border-dark-800 hover:text-white'}`}>
               {r}
             </button>
           ))}
@@ -95,7 +95,7 @@ const ManageUsers = () => {
             <tbody className="divide-y divide-dark-800">
               {loading ? (
                 [...Array(8)].map((_, i) => (
-                  <tr key={i}><td colSpan={5} className="px-5 py-4"><div className="h-8 bg-dark-800 rounded animate-pulse" /></td></tr>
+                  <tr key={i}><td colSpan={5} className="px-5 py-4"><div className="h-8 bg-dark-900 rounded animate-pulse" /></td></tr>
                 ))
               ) : users.length === 0 ? (
                 <tr><td colSpan={5} className="text-center py-12 text-dark-500">No users found</td></tr>
@@ -147,8 +147,8 @@ const ManageUsers = () => {
           <div className="flex items-center justify-between px-5 py-4 border-t border-dark-700">
             <p className="text-dark-400 text-sm">Page {page} of {totalPages}</p>
             <div className="flex gap-2">
-              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="px-3 py-1.5 rounded-lg bg-dark-800 text-sm text-dark-300 disabled:opacity-40 hover:bg-dark-700 transition-colors">Prev</button>
-              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="px-3 py-1.5 rounded-lg bg-dark-800 text-sm text-dark-300 disabled:opacity-40 hover:bg-dark-700 transition-colors">Next</button>
+              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="px-3 py-1.5 rounded-lg bg-dark-900 text-sm text-dark-300 disabled:opacity-40 hover:bg-dark-800 transition-colors">Prev</button>
+              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="px-3 py-1.5 rounded-lg bg-dark-900 text-sm text-dark-300 disabled:opacity-40 hover:bg-dark-800 transition-colors">Next</button>
             </div>
           </div>
         )}

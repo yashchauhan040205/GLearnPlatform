@@ -11,6 +11,10 @@ const CONTENT_TYPES = [
 ]
 const DIFFICULTIES = ['beginner', 'intermediate', 'advanced']
 
+const Field = ({ label, children }) => (
+  <div><label className="block text-dark-300 text-sm mb-2">{label}</label>{children}</div>
+)
+
 const LessonEditor = () => {
   const { courseId, lessonId } = useParams()
   const isEdit = Boolean(lessonId)
@@ -76,24 +80,22 @@ const LessonEditor = () => {
   const removeResource = (i) => setResources(r => r.filter((_, idx) => idx !== i))
   const updateResource = (i, field, val) => setResources(r => r.map((res, idx) => idx === i ? { ...res, [field]: val } : res))
 
-  const Field = ({ label, children }) => (
-    <div><label className="block text-dark-300 text-sm mb-2">{label}</label>{children}</div>
-  )
+
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-dark-800 hover:bg-dark-700 text-dark-300 hover:text-white transition-colors">
+        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-dark-900 hover:bg-dark-800 text-dark-300 hover:text-white transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="text-2xl font-black text-white">{isEdit ? 'Edit Lesson' : 'Create Lesson'}</h1>
+          <h1 className="text-xl font-bold text-dark-100">{isEdit ? 'Edit Lesson' : 'Create Lesson'}</h1>
           <p className="text-dark-400 text-sm">Course content editor</p>
         </div>
       </div>
 
       {loading ? (
-        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-dark-800 rounded-xl animate-pulse" />)}</div>
+        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-dark-900 rounded-xl animate-pulse" />)}</div>
       ) : (
         <>
           <div className="card p-6 space-y-5">
@@ -155,7 +157,7 @@ const LessonEditor = () => {
           {/* Resources */}
           <div className="card p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-white font-semibold">Resources</h3>
+              <h3 className="text-dark-100 font-semibold">Resources</h3>
               <button onClick={addResource} className="text-primary-400 text-sm flex items-center gap-1 hover:underline"><Plus className="w-4 h-4" />Add</button>
             </div>
             {resources.map((res, i) => (

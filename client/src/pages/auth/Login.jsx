@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Zap, Eye, EyeOff, Mail, Lock } from 'lucide-react'
+import { Eye, EyeOff, Mail, Lock, BookOpen } from 'lucide-react'
 import { useAuth } from '../../context/AuthContext'
 import toast from 'react-hot-toast'
 
@@ -29,41 +28,33 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 flex items-center justify-center px-4">
-      {/* Background glows */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/4 right-1/4 w-80 h-80 bg-purple-500/5 rounded-full blur-3xl pointer-events-none" />
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="w-full max-w-md"
-      >
+    <div className="min-h-screen bg-dark-950 flex items-center justify-center px-4">
+      <div className="w-full max-w-sm">
         {/* Logo */}
-        <div className="text-center mb-8">
-          <Link to="/" className="inline-flex items-center gap-2 mb-6">
-            <div className="w-10 h-10 bg-gradient-brand rounded-xl flex items-center justify-center shadow-glow-sm">
-              <Zap size={20} className="text-white" />
+        <div className="text-center mb-6">
+          <Link to="/" className="inline-flex items-center gap-2 mb-4">
+            <div className="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center">
+              <BookOpen size={16} className="text-white" />
             </div>
-            <span className="text-white font-bold text-xl">GLearnPlatform</span>
+            <span className="text-dark-100 font-semibold">GLearnPlatform</span>
           </Link>
-          <h1 className="text-2xl font-black text-white">Welcome back!</h1>
-          <p className="text-dark-400 mt-1">Sign in to continue your learning journey</p>
+          <h1 className="text-xl font-bold text-dark-100">Welcome back</h1>
+          <p className="text-dark-400 text-sm mt-1">Sign in to your account</p>
         </div>
 
         {/* Card */}
-        <div className="card p-8 space-y-5">
-          <form onSubmit={handleSubmit} className="space-y-4">
+        <div className="bg-dark-900 border border-dark-800 rounded-2xl p-6 space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             {/* Email */}
             <div>
-              <label className="block text-dark-300 text-sm mb-2">Email</label>
+              <label className="label">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-400" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-500" />
                 <input
                   type="email"
                   name="email"
                   autoComplete="email"
-                  className="input w-full pl-10"
+                  className="input w-full pl-9"
                   placeholder="you@example.com"
                   value={form.email}
                   onChange={handleChange}
@@ -73,22 +64,22 @@ const Login = () => {
 
             {/* Password */}
             <div>
-              <label className="block text-dark-300 text-sm mb-2">Password</label>
+              <label className="label">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-400" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-500" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
                   autoComplete="current-password"
-                  className="input w-full pl-10 pr-10"
-                  placeholder="••••••••"
+                  className="input w-full pl-9 pr-9"
+                  placeholder="Enter password"
                   value={form.password}
                   onChange={handleChange}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(s => !s)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-dark-400 hover:text-white transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-dark-500 hover:text-dark-300 transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -98,7 +89,7 @@ const Login = () => {
             <button
               type="submit"
               disabled={loading}
-              className="btn-primary w-full py-3 text-base font-semibold shadow-glow"
+              className="btn-primary w-full py-2.5 justify-center"
             >
               {loading ? 'Signing in...' : 'Sign In'}
             </button>
@@ -107,19 +98,19 @@ const Login = () => {
           <p className="text-center text-dark-400 text-sm">
             Don't have an account?{' '}
             <Link to="/register" className="text-primary-400 hover:text-primary-300 font-medium transition-colors">
-              Create one free
+              Sign up
             </Link>
           </p>
         </div>
 
-        {/* Demo accounts hint */}
-        <div className="mt-4 p-4 bg-dark-800/50 rounded-xl border border-dark-700 text-xs text-dark-400 space-y-1">
-          <p className="text-dark-300 font-medium mb-2">Demo accounts:</p>
-          <p>🎓 Student — <span className="text-primary-400">alex@example.com</span> / student123</p>
-          <p>📚 Educator — <span className="text-green-400">educator@glearnplatform.com</span> / educator123</p>
-          <p>🛡️ Admin — <span className="text-red-400">admin@glearnplatform.com</span> / admin123</p>
+        {/* Demo accounts */}
+        <div className="mt-3 p-3 bg-dark-900 rounded-lg border border-dark-800 text-xs text-dark-400 space-y-1">
+          <p className="text-dark-200 font-medium mb-1.5">Demo accounts:</p>
+          <p>Student — <span className="text-primary-400">alex@example.com</span> / student123</p>
+          <p>Educator — <span className="text-emerald-400">educator@glearnplatform.com</span> / educator123</p>
+          <p>Admin — <span className="text-rose-400">admin@glearnplatform.com</span> / admin123</p>
         </div>
-      </motion.div>
+      </div>
     </div>
   )
 }

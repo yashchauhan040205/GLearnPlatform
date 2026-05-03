@@ -7,6 +7,8 @@ import toast from 'react-hot-toast'
 const DEFAULT_QUESTION = { question: '', options: ['', '', '', ''], correctAnswer: 0, explanation: '', points: 10, difficulty: 'beginner' }
 const DIFFICULTIES = ['beginner', 'intermediate', 'advanced']
 
+const Field = ({ label, children }) => <div><label className="block text-dark-300 text-sm mb-2">{label}</label>{children}</div>
+
 const QuizEditor = () => {
   const { courseId, quizId } = useParams()
   const isEdit = Boolean(quizId)
@@ -68,27 +70,27 @@ const QuizEditor = () => {
   const updateQ = (i, field, val) => setQuestions(qs => qs.map((q, idx) => idx === i ? { ...q, [field]: val } : q))
   const updateOption = (qi, oi, val) => setQuestions(qs => qs.map((q, idx) => idx === qi ? { ...q, options: q.options.map((o, oidx) => oidx === oi ? val : o) } : q))
 
-  const Field = ({ label, children }) => <div><label className="block text-dark-300 text-sm mb-2">{label}</label>{children}</div>
+
 
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-dark-800 hover:bg-dark-700 text-dark-300 hover:text-white transition-colors">
+        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-dark-900 hover:bg-dark-800 text-dark-300 hover:text-white transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="text-2xl font-black text-white">{isEdit ? 'Edit Quiz' : 'Create Quiz'}</h1>
+          <h1 className="text-xl font-bold text-dark-100">{isEdit ? 'Edit Quiz' : 'Create Quiz'}</h1>
           <p className="text-dark-400 text-sm">{questions.length} question{questions.length !== 1 ? 's' : ''}</p>
         </div>
       </div>
 
       {loading ? (
-        <div className="space-y-4">{[...Array(3)].map((_, i) => <div key={i} className="h-20 bg-dark-800 rounded-xl animate-pulse" />)}</div>
+        <div className="space-y-4">{[...Array(3)].map((_, i) => <div key={i} className="h-20 bg-dark-900 rounded-xl animate-pulse" />)}</div>
       ) : (
         <>
           {/* Quiz Settings */}
           <div className="card p-6 space-y-4">
-            <h3 className="text-white font-semibold">Quiz Settings</h3>
+            <h3 className="text-dark-100 font-semibold">Quiz Settings</h3>
             <Field label="Quiz Title *">
               <input className="input w-full" placeholder="e.g. React Fundamentals Quiz" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
             </Field>
@@ -107,7 +109,7 @@ const QuizEditor = () => {
           {questions.map((q, qi) => (
             <div key={qi} className="card p-6 space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-white font-semibold flex items-center gap-2"><HelpCircle className="w-4 h-4 text-primary-400" />Question {qi + 1}</h3>
+                <h3 className="text-dark-100 font-semibold flex items-center gap-2"><HelpCircle className="w-4 h-4 text-primary-600" />Question {qi + 1}</h3>
                 {questions.length > 1 && (
                   <button onClick={() => removeQuestion(qi)} className="p-1.5 text-red-400 hover:bg-red-400/10 rounded-lg transition-colors"><Trash2 className="w-4 h-4" /></button>
                 )}

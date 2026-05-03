@@ -10,7 +10,10 @@ export const initSocket = (userId) => {
   })
   socket.on('connect', () => {
     console.log('Socket connected:', socket.id)
-    if (userId) socket.emit('join:user', userId)
+    if (userId) {
+      socket.emit('join:user', userId)
+      socket.emit('join:leaderboard')
+    }
   })
   socket.on('disconnect', () => console.log('Socket disconnected'))
   return socket
@@ -22,8 +25,12 @@ export const joinCourse = (courseId) => {
   if (socket) socket.emit('join:course', courseId)
 }
 
+export const joinLeaderboard = () => {
+  if (socket) socket.emit('join:leaderboard')
+}
+
 export const disconnectSocket = () => {
   if (socket) { socket.disconnect(); socket = null }
 }
 
-export default { initSocket, getSocket, joinCourse, disconnectSocket }
+export default { initSocket, getSocket, joinCourse, joinLeaderboard, disconnectSocket }

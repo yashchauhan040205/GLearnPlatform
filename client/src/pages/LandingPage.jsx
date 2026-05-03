@@ -1,22 +1,20 @@
 import { useNavigate } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { Zap, Trophy, Star, BookOpen, Users, ArrowRight, Award, TrendingUp, Shield } from 'lucide-react'
+import { BookOpen, ArrowRight, Award, TrendingUp, Zap, BarChart2, MessageSquare, Flame, ShieldCheck, Users } from 'lucide-react'
 import { useAuth } from '../context/AuthContext'
 
 const features = [
-  { icon: '🎮', title: 'Gamified Learning', desc: 'Earn XP, unlock badges, and level up as you master new skills' },
-  { icon: '🤖', title: 'Smart Recommendations', desc: 'Get personalized course suggestions tailored to your goals and progress' },
-  { icon: '🏆', title: 'Leaderboards', desc: 'Compete with peers and climb the global rankings' },
-  { icon: '🔥', title: 'Daily Streaks', desc: 'Build consistency with streak tracking and rewards' },
-  { icon: '📊', title: 'Analytics', desc: 'Track your progress with detailed performance insights' },
-  { icon: '💬', title: 'Community', desc: 'Discuss, collaborate and challenge your peers' },
+  { icon: Zap,           title: 'XP & Levelling',     desc: 'Every lesson and quiz earns experience points. Your level rises as your knowledge deepens.' },
+  { icon: Award,         title: 'Achievement Badges',  desc: 'Unlock curated badges that reflect your expertise and consistency across subjects.' },
+  { icon: TrendingUp,    title: 'Global Leaderboard',  desc: 'Compete with fellow learners worldwide and track your climb to the top.' },
+  { icon: Flame,         title: 'Daily Streaks',        desc: 'Build a learning habit. Streak shields protect you on the days life gets busy.' },
+  { icon: BarChart2,     title: 'Progress Analytics',  desc: 'Detailed dashboards showing quiz scores, completion rates, and XP over time.' },
+  { icon: MessageSquare, title: 'Course Discussions',  desc: 'Ask questions and collaborate with peers directly inside every course.' },
 ]
 
-const stats = [
-  { icon: Users, label: 'Active Learners', value: '25K+' },
-  { icon: BookOpen, label: 'Courses Available', value: '500+' },
-  { icon: Award, label: 'Badges Awarded', value: '1M+' },
-  { icon: TrendingUp, label: 'Completion Rate', value: '92%' },
+const steps = [
+  { num: '01', title: 'Create an account',   desc: 'Register as a Student or Educator in under a minute. No credit card needed.' },
+  { num: '02', title: 'Enroll in a course',  desc: 'Browse the library and enroll with a single click to begin immediately.' },
+  { num: '03', title: 'Learn & earn rewards', desc: 'Complete lessons, pass quizzes, collect XP and badges, and rise up the leaderboard.' },
 ]
 
 const LandingPage = () => {
@@ -24,176 +22,148 @@ const LandingPage = () => {
   const { user } = useAuth()
 
   const handleStart = () => {
-    if (user) {
-      navigate(`/${user.role}`)
-    } else {
-      navigate('/register')
-    }
+    if (user) navigate(`/${user.role}`)
+    else navigate('/register')
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 overflow-hidden">
-      {/* Nav */}
-      <nav className="fixed top-0 w-full z-50 bg-dark-900/80 backdrop-blur-md border-b border-dark-700/50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-brand rounded-lg flex items-center justify-center">
-              <Zap size={16} className="text-white" />
+    <div className="landing-bg">
+
+      {/* subtle grid overlay */}
+      <div className="landing-grid-overlay" />
+
+      {/* ── Navbar ── */}
+      <nav className="relative z-10 sticky top-0 border-b border-white/10 bg-dark-950/80 backdrop-blur-lg">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8 h-15 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <div className="w-8 h-8 rounded-lg flex items-center justify-center bg-primary-600 shadow-md">
+              <BookOpen size={15} className="text-white" />
             </div>
-            <span className="text-white font-bold text-lg">GLearnPlatform</span>
+            <span className="font-bold text-white tracking-tight text-sm">GLearnPlatform</span>
           </div>
-          <div className="flex items-center gap-3">
-            <button onClick={() => navigate('/login')} className="text-dark-300 hover:text-white text-sm font-medium transition-colors">Login</button>
-            <button onClick={() => navigate('/register')} className="btn-primary text-sm py-2">Get Started</button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => navigate('/login')}
+              className="text-sm px-4 py-2 rounded-lg font-medium text-white/60 hover:text-white transition-colors"
+            >
+              Log in
+            </button>
+            <button
+              onClick={() => navigate('/register')}
+              className="text-sm px-4 py-2 rounded-lg font-semibold flex items-center gap-1.5 bg-primary-600 text-white hover:bg-primary-500 transition-colors shadow-md"
+            >
+              Sign up <ArrowRight size={13} />
+            </button>
           </div>
         </div>
       </nav>
 
-      {/* Hero */}
-      <section className="relative pt-32 pb-24 px-4 sm:px-6 overflow-hidden bg-hero-pattern">
-        {/* Background glows */}
-        <div className="absolute top-20 left-1/4 w-96 h-96 bg-primary-500/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl pointer-events-none" />
+      {/* ── Hero ── */}
+      <section className="relative z-10 max-w-3xl mx-auto px-5 sm:px-8 pt-24 pb-20 text-center">
+        {/* glow */}
+        <div className="landing-hero-glow" />
 
-        <div className="max-w-4xl mx-auto text-center relative">
-          <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="inline-flex items-center gap-2 bg-primary-500/10 border border-primary-500/30 text-primary-400 text-xs font-semibold px-4 py-1.5 rounded-full mb-6"
-          >
-            <Zap size={12} /> Gamified · Role-Based Learning
-          </motion.div>
-
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.1 }}
-            className="text-5xl sm:text-6xl lg:text-7xl font-black text-white mb-6 leading-tight"
-          >
-            Learn. Play.{' '}
-            <span className="text-gradient">Level Up.</span>
-          </motion.h1>
-
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-            className="text-dark-400 text-xl mb-10 max-w-2xl mx-auto"
-          >
-            Turn knowledge into your superpower. Earn XP, unlock badges,
-            rise up the leaderboard, and conquer skills — one quest at a time.
-          </motion.p>
-
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.3 }}
-            className="flex items-center justify-center gap-4"
-          >
-            <button onClick={handleStart} className="btn-primary text-base py-3.5 px-8 shadow-glow">
-              Start Learning Free <ArrowRight size={18} />
+        <div className="relative">
+          <div className="landing-hero-chip">
+            <ShieldCheck size={11} /> Structured learning that actually works
+          </div>
+          <h1 className="text-4xl sm:text-5xl font-bold leading-[1.1] mb-5 tracking-tight">
+            The smarter way<br />
+            <span className="text-primary-400">to learn online.</span>
+          </h1>
+          <p className="text-base leading-relaxed mb-8 max-w-xl mx-auto text-white/60">
+            Structured courses, real-time progress tracking, XP points, badges, and leaderboards — everything to keep you learning every single day.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <button
+              onClick={handleStart}
+              className="btn-primary px-6 py-2.5 text-sm flex items-center gap-2 shadow-lg shadow-primary-900/40"
+            >
+              Get started free <ArrowRight size={15} />
             </button>
-            <button onClick={() => navigate('/login')} className="btn-secondary text-base py-3.5 px-8">
-              Sign In
+            <button
+              onClick={() => navigate('/login')}
+              className="flex items-center gap-2 px-5 py-2.5 rounded-lg font-medium text-sm border border-white/10 text-white/70 hover:text-white hover:border-white/20 bg-transparent transition-colors"
+            >
+              Log in
             </button>
-          </motion.div>
-
-          {/* Floating stats */}
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ delay: 0.5 }}
-            className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-16 max-w-2xl mx-auto"
-          >
-            {stats.map(({ icon: Icon, label, value }) => (
-              <div key={label} className="glass rounded-xl p-4 text-center">
-                <Icon size={20} className="text-primary-400 mx-auto mb-1.5" />
-                <p className="text-white font-bold text-xl">{value}</p>
-                <p className="text-dark-500 text-xs">{label}</p>
-              </div>
-            ))}
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* Features */}
-      <section className="py-24 px-4 sm:px-6 max-w-7xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">Everything you need to <span className="text-gradient">master any skill</span></h2>
-          <p className="text-dark-400 text-lg max-w-2xl mx-auto">Our platform combines the engagement of gaming with the power of structured learning</p>
+      {/* ── Features ── */}
+      <section className="relative z-10 py-20 px-5 sm:px-8 max-w-6xl mx-auto">
+        <div className="text-center mb-12">
+          <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-primary-200">Features</p>
+          <h2 className="text-3xl font-bold text-white mb-3 tracking-tight">Built for serious learners</h2>
+          <p className="max-w-lg mx-auto text-sm text-white/60">
+            Not just another video library. GLearnPlatform gives you structure, accountability, and reward.
+          </p>
         </div>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {features.map(({ icon, title, desc }, i) => (
-            <motion.div
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+          {features.map(({ icon: Icon, title, desc }) => (
+            <div
               key={title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.08 }}
-              viewport={{ once: true }}
-              className="card hover:border-primary-500/40 hover:-translate-y-1 transition-all duration-300 group"
+              className="landing-section-card"
             >
-              <div className="w-14 h-14 rounded-2xl bg-primary-500/10 border border-primary-500/20 flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform duration-300">{icon}</div>
-              <h3 className="text-white font-bold text-lg mb-2">{title}</h3>
-              <p className="text-dark-400 text-sm leading-relaxed">{desc}</p>
-            </motion.div>
+              <div className="w-8 h-8 rounded-lg flex items-center justify-center mb-4 bg-primary-500/10 border border-primary-400/30">
+                <Icon size={15} className="text-primary-200" />
+              </div>
+              <h3 className="font-semibold text-white text-sm mb-2">{title}</h3>
+              <p className="text-sm leading-relaxed text-white/60">{desc}</p>
+            </div>
           ))}
         </div>
       </section>
 
-      {/* How it Works */}
-      <section className="py-24 px-4 sm:px-6 bg-dark-800/30">
-        <div className="max-w-5xl mx-auto">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl sm:text-4xl font-black text-white mb-4">How it <span className="text-gradient">Works</span></h2>
-            <p className="text-dark-400 text-lg">Get started in three simple steps</p>
+      {/* ── How it works ── */}
+      <section className="relative z-10 py-20 px-5 sm:px-8 bg-black/40 border-y border-white/10">
+        <div className="max-w-4xl mx-auto">
+          <div className="text-center mb-12">
+            <p className="text-xs font-semibold uppercase tracking-widest mb-3 text-primary-200">How it works</p>
+            <h2 className="text-3xl font-bold text-white tracking-tight">Three steps to get started</h2>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
-            {/* Connector line */}
-            <div className="hidden md:block absolute top-8 left-1/4 right-1/4 h-0.5 bg-gradient-to-r from-primary-500/50 via-purple-500/50 to-pink-500/50" />
-            {[
-              { step: '01', icon: '📝', title: 'Create an Account', desc: 'Sign up as a Student or Educator in under 30 seconds — no credit card needed.' },
-              { step: '02', icon: '📚', title: 'Pick Your Course', desc: 'Browse 500+ courses or get AI-powered recommendations based on your interests.' },
-              { step: '03', icon: '🏆', title: 'Learn & Earn Rewards', desc: 'Complete lessons, pass quizzes, earn XP, unlock badges and climb the leaderboard.' },
-            ].map(({ step, icon, title, desc }, i) => (
-              <motion.div
-                key={step}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.15 }}
-                viewport={{ once: true }}
-                className="text-center relative"
-              >
-                <div className="w-16 h-16 rounded-2xl bg-gradient-brand flex items-center justify-center text-2xl mx-auto mb-5 shadow-glow">{icon}</div>
-                <span className="text-primary-500 font-black text-xs tracking-widest uppercase mb-2 block">Step {step}</span>
-                <h3 className="text-white font-bold text-xl mb-3">{title}</h3>
-                <p className="text-dark-400 text-sm leading-relaxed max-w-xs mx-auto">{desc}</p>
-              </motion.div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {steps.map(({ num, title, desc }) => (
+              <div key={num} className="landing-step-card">
+                <p className="text-xs font-bold mb-4 text-primary-400" style={{ fontVariantNumeric: 'tabular-nums' }}>{num}</p>
+                <h3 className="font-semibold text-white mb-2 text-sm">{title}</h3>
+                <p className="text-sm leading-relaxed text-white/60">{desc}</p>
+              </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-24 px-4 sm:px-6">
-        <div className="max-w-3xl mx-auto text-center">
-          <div className="bg-gradient-to-br from-primary-900/50 to-purple-900/30 border border-primary-700/30 rounded-3xl p-12">
-            <div className="text-6xl mb-6">🚀</div>
-            <h2 className="text-4xl font-black text-white mb-4">Ready to level up?</h2>
-            <p className="text-dark-400 mb-8 text-lg">Join thousands of learners already transforming their skills with GLearnPlatform</p>
-            <button onClick={handleStart} className="btn-primary text-lg py-4 px-10 shadow-glow mx-auto">
-              Start Your Journey <ArrowRight size={20} />
-            </button>
+      {/* ── CTA ── */}
+      <section className="relative z-10 py-20 px-5 sm:px-8">
+        <div className="landing-cta-card">
+          <div className="w-12 h-12 rounded-xl flex items-center justify-center mx-auto mb-5 bg-primary-500/10 border border-primary-400/40">
+            <Users size={20} className="text-primary-200" />
           </div>
+          <h2 className="text-2xl font-bold text-white mb-3 tracking-tight">Start learning today</h2>
+          <p className="text-sm mb-7 text-white/70">
+            Sign up for free and start building real skills with structured courses, badges, and progress tracking.
+          </p>
+          <button
+            onClick={handleStart}
+            className="btn-primary inline-flex items-center gap-2 px-6 py-3 text-sm shadow-lg shadow-primary-900/40"
+          >
+            Create free account <ArrowRight size={15} />
+          </button>
+          <p className="mt-4 text-xs text-white/40">No credit card required.</p>
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t border-dark-700 py-8 px-4 text-center text-dark-500 text-sm">
+      {/* ── Footer ── */}
+      <footer className="relative z-10 py-8 px-5 text-center border-t border-white/10">
         <div className="flex items-center justify-center gap-2 mb-2">
-          <Zap size={14} className="text-primary-400" />
-          <span className="text-white font-semibold">GLearnPlatform</span>
+          <div className="w-5 h-5 rounded flex items-center justify-center bg-primary-600">
+            <BookOpen size={10} className="text-white" />
+          </div>
+          <span className="text-xs font-semibold text-white/40">GLearnPlatform</span>
         </div>
-        <p>© 2026 GLearnPlatform · Gamified Learning Platform</p>
+        <p className="text-xs text-white/30">&copy; 2026 GLearnPlatform. All rights reserved.</p>
       </footer>
     </div>
   )

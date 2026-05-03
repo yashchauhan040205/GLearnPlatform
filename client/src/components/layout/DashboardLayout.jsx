@@ -14,31 +14,39 @@ const DashboardLayout = () => {
   useEffect(() => {
     if (user) {
       const socket = initSocket(user._id)
-      socket.on('leaderboard:update', () => {})
-      socket.on('achievement:unlocked', (badge) => {
+      const handleLeaderboard = () => {}
+      const handleAchievement = (badge) => {
         setAchievement(badge)
         setTimeout(() => setAchievement(null), 4000)
-      })
+      }
+      socket.on('leaderboard:update', handleLeaderboard)
+      socket.on('achievement:unlocked', handleAchievement)
+      return () => {
+        socket.off('leaderboard:update', handleLeaderboard)
+        socket.off('achievement:unlocked', handleAchievement)
+      }
     }
   }, [user])
 
   return (
-    <div className="flex h-screen overflow-hidden bg-dark-900">
+    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-dark-950 via-slate-950 to-dark-900">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
       {/* Main content */}
       <div className="flex-1 flex flex-col overflow-hidden">
         <Topbar onMenuClick={() => setSidebarOpen(true)} />
-        <main className="flex-1 overflow-y-auto p-4 md:p-6 lg:p-8">
-          <Outlet />
+        <main className="flex-1 overflow-y-auto p-4 md:p-8 lg:p-10">
+          <div className="max-w-6xl mx-auto space-y-6">
+            <Outlet />
+          </div>
         </main>
       </div>
 
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/60 z-30 md:hidden backdrop-blur-sm"
+          className="fixed inset-0 bg-black/30 z-30 md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}

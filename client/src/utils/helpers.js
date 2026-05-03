@@ -85,5 +85,5 @@ export const getDifficultyColor = (difficulty) => {
 
 // Generate avatar URL 
 export const getAvatarUrl = (name, size = 40) => {
-  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=${size}&background=6366f1&color=fff&bold=true`
+  return `https://ui-avatars.com/api/?name=${encodeURIComponent(name)}&size=${size}&background=b45309&color=fff&bold=true`
 }
