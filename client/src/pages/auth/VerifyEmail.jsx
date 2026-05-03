@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSearchParams, Link, useNavigate } from 'react-router-dom'
 import { CheckCircle, XCircle, Loader, BookOpen, Mail } from 'lucide-react'
 import toast from 'react-hot-toast'
-import { API } from '../../config/api'
+import api from '../../services/api'
 
 const VerifyEmail = () => {
   const [searchParams] = useSearchParams()
@@ -23,7 +23,7 @@ const VerifyEmail = () => {
 
     const verifyEmail = async () => {
       try {
-        const response = await API.get(`/auth/verify-email/${token}`)
+        const response = await api.get(`/auth/verify-email/${token}`)
         setStatus('success')
         setMessage(response.data.message || 'Email verified successfully!')
         setTimeout(() => navigate('/'), 3000)
@@ -48,7 +48,7 @@ const VerifyEmail = () => {
 
     setResendLoading(true)
     try {
-      const response = await API.post('/auth/resend-verification', { email })
+      const response = await api.post('/auth/resend-verification', { email })
       toast.success(response.data.message || 'Verification email sent!')
       setEmail('')
       setShowResend(false)
