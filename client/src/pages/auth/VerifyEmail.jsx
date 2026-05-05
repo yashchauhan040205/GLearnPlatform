@@ -69,30 +69,30 @@ const VerifyEmail = () => {
   }
 
   return (
-    <div className="min-h-screen bg-dark-950 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-b from-white via-emerald-50/60 to-white flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-6">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center">
+            <div className="w-8 h-8 bg-emerald-600 rounded-md flex items-center justify-center">
               <BookOpen size={16} className="text-white" />
             </div>
-            <span className="text-dark-100 font-semibold">GLearnPlatform</span>
+            <span className="text-slate-900 font-semibold">GLearnPlatform</span>
           </Link>
-          <h1 className="text-xl font-bold text-dark-100">Verify Your Email</h1>
-          <p className="text-dark-400 text-sm mt-1">One step closer to learning</p>
+          <h1 className="text-xl font-bold text-slate-900">Verify Your Email</h1>
+          <p className="text-slate-500 text-sm mt-1">One step closer to learning</p>
         </div>
 
         {/* Card */}
-        <div className="bg-dark-900 border border-dark-800 rounded-2xl p-8">
+        <div className="bg-white border border-emerald-100 rounded-2xl p-8 shadow-sm">
           {/* Loading State */}
           {status === 'loading' && (
             <div className="text-center space-y-4">
               <div className="flex justify-center">
-                <Loader className="w-12 h-12 text-primary-600 animate-spin" />
+                <Loader className="w-12 h-12 text-emerald-600 animate-spin" />
               </div>
-              <h2 className="text-lg font-semibold text-dark-100">Verifying your email...</h2>
-              <p className="text-dark-400 text-sm">Please wait while we verify your email address</p>
+              <h2 className="text-lg font-semibold text-slate-900">Verifying your email...</h2>
+              <p className="text-slate-500 text-sm">Please wait while we verify your email address</p>
             </div>
           )}
 
@@ -102,12 +102,12 @@ const VerifyEmail = () => {
               <div className="flex justify-center">
                 <CheckCircle className="w-12 h-12 text-green-500" />
               </div>
-              <h2 className="text-lg font-semibold text-dark-100">✓ Email Verified!</h2>
-              <p className="text-dark-400 text-sm">{message}</p>
-              <p className="text-dark-500 text-xs">Redirecting to home page...</p>
+              <h2 className="text-lg font-semibold text-slate-900">✓ Email Verified!</h2>
+              <p className="text-slate-500 text-sm">{message}</p>
+              <p className="text-slate-400 text-xs">Redirecting to home page...</p>
               <Link
                 to="/"
-                className="inline-block mt-4 px-6 py-2 bg-primary-600 text-white rounded-lg hover:bg-primary-700 transition"
+                className="inline-block mt-4 px-6 py-2 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition"
               >
                 Go to Home
               </Link>
@@ -121,22 +121,22 @@ const VerifyEmail = () => {
                 <div className="flex justify-center">
                   <XCircle className="w-12 h-12 text-amber-500" />
                 </div>
-                <h2 className="text-lg font-semibold text-dark-100">
+                <h2 className="text-lg font-semibold text-slate-900">
                   {emailParam ? '📧 Verify Your Email' : 'Verification Failed'}
                 </h2>
-                <p className="text-dark-400 text-sm">
+                <p className="text-slate-500 text-sm">
                   {emailParam ? 'Check your email for the verification link. If you don\'t see it, request a new one below.' : message}
                 </p>
               </div>
 
               {/* Resend Form */}
               {showResend || emailParam ? (
-                <form onSubmit={handleResendEmail} className="mt-6 space-y-3 border-t border-dark-800 pt-6">
-                  <p className="text-dark-400 text-sm text-center">Request verification email</p>
+                <form onSubmit={handleResendEmail} className="mt-6 space-y-3 border-t border-emerald-100 pt-6">
+                  <p className="text-slate-500 text-sm text-center">Request verification email</p>
                   <div>
                     <label className="label">Email Address</label>
                     <div className="relative">
-                      <Mail size={18} className="absolute left-3 top-3 text-dark-500" />
+                      <Mail size={18} className="absolute left-3 top-3 text-slate-400" />
                       <input
                         type="email"
                         value={email}
@@ -159,9 +159,9 @@ const VerifyEmail = () => {
 
               {/* Back to Login */}
               <div className="text-center">
-                <p className="text-dark-400 text-sm">
+                <p className="text-slate-500 text-sm">
                   Already verified?{' '}
-                  <Link to="/login" className="text-primary-600 hover:text-primary-500 font-semibold">
+                  <Link to="/login" className="text-emerald-600 hover:text-emerald-500 font-semibold">
                     Sign in here
                   </Link>
                 </p>

@@ -21,6 +21,9 @@ const leaderboardRoutes = require('./routes/leaderboard');
 const discussionRoutes = require('./routes/discussions');
 const analyticsRoutes = require('./routes/analytics');
 const adminRoutes = require('./routes/admin');
+const reflectionRoutes = require('./routes/reflections');
+const progressRoutes = require('./routes/progress');
+const publicRoutes = require('./routes/public');
 
 const app = express();
 const server = http.createServer(app);
@@ -31,12 +34,13 @@ connectDB();
 // Init Socket.io
 initSocket(server);
 
-// Rate limiting
-const limiter = rateLimit({
-  windowMs: 15 * 60 * 1000,
-  max: 200,
-  message: 'Too many requests from this IP, please try again later.',
-});
+// Rate limiting (disabled for development, can be enabled for production)
+const limiter = (req, res, next) => next(); // Pass through for now
+// const limiter = rateLimit({
+//   windowMs: 15 * 60 * 1000,
+//   max: 1000,
+//   message: 'Too many requests from this IP, please try again later.',
+// });
 
 // Middleware
 app.use(helmet({ crossOriginResourcePolicy: false }));
@@ -63,6 +67,9 @@ app.use('/api/leaderboard', leaderboardRoutes);
 app.use('/api/discussions', discussionRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/admin', adminRoutes);
+app.use('/api/reflections', reflectionRoutes);
+app.use('/api/progress', progressRoutes);
+app.use('/api/public', publicRoutes);
 
 // Health check
 app.get('/api/health', (req, res) => {

@@ -9,7 +9,7 @@ const LEVELS = ['beginner', 'intermediate', 'advanced']
 
 const Field = ({ label, children, hint }) => (
   <div>
-    <label className="block text-dark-300 text-sm mb-2">{label}</label>
+    <label className="block text-gray-300 text-sm mb-2">{label}</label>
     {children}
     {hint && <p className="text-dark-500 text-xs mt-1">{hint}</p>}
   </div>
@@ -110,17 +110,17 @@ const AdminCourseEditor = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate('/admin/courses')} className="p-2 rounded-xl bg-dark-900 hover:bg-dark-800 text-dark-300 hover:text-white transition-colors">
+        <button onClick={() => navigate('/admin/courses')} className="p-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="text-xl font-bold text-dark-100">{isEdit ? 'Edit Course' : 'Create Course'}</h1>
-          <p className="text-dark-400 text-sm">{isEdit ? 'Update course details (Admin)' : 'Fill in the details to create a new course'}</p>
+          <h1 className="text-xl font-bold text-gray-100">{isEdit ? 'Edit Course' : 'Create Course'}</h1>
+          <p className="text-gray-400 text-sm">{isEdit ? 'Update course details (Admin)' : 'Fill in the details to create a new course'}</p>
         </div>
       </div>
 
       {loading ? (
-        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-dark-900 rounded-xl animate-pulse" />)}</div>
+        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-gray-900 rounded-xl animate-pulse" />)}</div>
       ) : (
         <>
           <div className="card p-6 space-y-5">
@@ -181,8 +181,8 @@ const AdminCourseEditor = () => {
               {/* Lessons Section */}
               <div className="card p-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-dark-100 font-semibold flex items-center gap-2">
-                    <FileText className="w-4 h-4 text-primary-400" /> Lessons ({lessons.length})
+                  <h2 className="text-gray-100 font-semibold flex items-center gap-2">
+                    <FileText className="w-4 h-4 text-indigo-400" /> Lessons ({lessons.length})
                   </h2>
                   <button onClick={() => navigate(`/admin/courses/${id}/lessons/new`)} className="btn-primary text-sm flex items-center gap-2">
                     <Plus className="w-4 h-4" /> Add Lesson
@@ -193,15 +193,15 @@ const AdminCourseEditor = () => {
                 ) : (
                   <div className="space-y-2">
                     {lessons.map((lesson, i) => (
-                      <div key={lesson._id} className="flex items-center gap-3 p-3 bg-dark-900 rounded-xl group">
+                      <div key={lesson._id} className="flex items-center gap-3 p-3 bg-gray-900 rounded-xl group">
                         <span className="text-dark-500 text-sm w-6 text-center">{i + 1}</span>
                         <div className="flex-1">
-                          <p className="text-dark-100 text-sm font-medium">{lesson.title}</p>
+                          <p className="text-gray-100 text-sm font-medium">{lesson.title}</p>
                           <p className="text-dark-500 text-xs">{lesson.contentType} · {lesson.xpReward} XP</p>
                         </div>
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button onClick={() => navigate(`/admin/lessons/${lesson._id}/edit`)} className="p-1.5 rounded-lg text-dark-400 hover:text-white hover:bg-dark-700 transition-colors text-sm">Edit</button>
-                          <button onClick={() => handleDeleteLesson(lesson._id)} className="p-1.5 rounded-lg text-dark-400 hover:text-red-400 hover:bg-red-900/20 transition-colors">
+                          <button onClick={() => navigate(`/admin/lessons/${lesson._id}/edit`)} className="p-1.5 rounded-lg text-gray-400 hover:text-white hover:bg-gray-700 transition-colors text-sm">Edit</button>
+                          <button onClick={() => handleDeleteLesson(lesson._id)} className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-900/20 transition-colors">
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>
@@ -214,7 +214,7 @@ const AdminCourseEditor = () => {
               {/* Quizzes Section */}
               <div className="card p-6 space-y-4">
                 <div className="flex items-center justify-between">
-                  <h2 className="text-dark-100 font-semibold flex items-center gap-2">
+                  <h2 className="text-gray-100 font-semibold flex items-center gap-2">
                     <HelpCircle className="w-4 h-4 text-emerald-400" /> Quizzes ({quizzes.length})
                   </h2>
                   <button onClick={() => navigate(`/admin/courses/${id}/quiz/new`)} className="btn-primary text-sm flex items-center gap-2">
@@ -226,14 +226,14 @@ const AdminCourseEditor = () => {
                 ) : (
                   <div className="space-y-2">
                     {quizzes.map(quiz => (
-                      <div key={quiz._id} className="flex items-center gap-3 p-3 bg-dark-900 rounded-xl group">
+                      <div key={quiz._id} className="flex items-center gap-3 p-3 bg-gray-900 rounded-xl group">
                         <HelpCircle className="w-4 h-4 text-emerald-400 shrink-0" />
                         <div className="flex-1">
-                          <p className="text-dark-100 text-sm font-medium">{quiz.title}</p>
+                          <p className="text-gray-100 text-sm font-medium">{quiz.title}</p>
                           <p className="text-dark-500 text-xs">{quiz.questions?.length || 0} questions · {quiz.timeLimit} min · {quiz.xpReward} XP</p>
                         </div>
                         <div className="flex gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button onClick={() => handleDeleteQuiz(quiz._id)} className="p-1.5 rounded-lg text-dark-400 hover:text-red-400 hover:bg-red-900/20 transition-colors">
+                          <button onClick={() => handleDeleteQuiz(quiz._id)} className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-900/20 transition-colors">
                             <Trash2 className="w-3.5 h-3.5" />
                           </button>
                         </div>

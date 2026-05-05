@@ -122,6 +122,7 @@ const enrollCourse = async (req, res) => {
     await user.save();
     if (!course.enrolledStudents.some(id => id.toString() === user._id.toString())) {
       course.enrolledStudents.push(user._id);
+      course.enrollmentCount = (course.enrollmentCount || 0) + 1;
       await course.save();
     }
     res.json({ success: true, message: 'Enrolled successfully' });
@@ -166,9 +167,16 @@ const getRecommendations = async (req, res) => {
     const completedCategories = user.completedCourses.map(c => c.category);
     const difficultyMap = { easy: 'beginner', medium: 'intermediate', hard: 'advanced' };
     const targetDifficulty = difficultyMap[user.preferredDifficulty] || 'beginner';
+
+    // Convert enrolledCourses to ObjectIds, handling both string IDs and object references
+    const enrolledIds = user.enrolledCourses.map(c => {
+      if (typeof c === 'string') return c;
+      return c._id ? c._id.toString() : c.toString();
+    });
+
     const recommendations = await Course.find({
       isPublished: true,
-      _id: { $nin: user.enrolledCourses },
+      _id: { $nin: enrolledIds },
       $or: [
         { category: { $in: completedCategories } },
         { difficulty: targetDifficulty },

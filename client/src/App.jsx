@@ -16,6 +16,7 @@ import Courses from './pages/student/Courses'
 import CourseDetail from './pages/student/CourseDetail'
 import LessonView from './pages/student/LessonView'
 import QuizPage from './pages/student/QuizPage'
+import Quizzes from './pages/student/Quizzes'
 import Leaderboard from './pages/student/Leaderboard'
 import Badges from './pages/student/Badges'
 import Profile from './pages/student/Profile'
@@ -41,13 +42,13 @@ function App() {
     <ThemeProvider>
       <AuthProvider>
         <Router>
-          <div className="min-h-screen bg-dark-900">
+          <div className="min-h-screen bg-white text-slate-800">
             <Toaster
               position="top-right"
               toastOptions={{
-                style: { background: '#fff', color: '#212529', border: '1px solid #dee2e6', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' },
-                success: { iconTheme: { primary: '#2f9e44', secondary: '#fff' } },
-                error: { iconTheme: { primary: '#e03131', secondary: '#fff' } },
+                style: { background: '#fff', color: '#1f2937', border: '1px solid #d1fae5', boxShadow: '0 1px 3px rgba(16,185,129,0.10)' },
+                success: { iconTheme: { primary: '#16a34a', secondary: '#fff' } },
+                error: { iconTheme: { primary: '#dc2626', secondary: '#fff' } },
               }}
             />
             <Routes>
@@ -63,6 +64,7 @@ function App() {
                 <Route path="courses" element={<Courses />} />
                 <Route path="courses/:id" element={<CourseDetail />} />
                 <Route path="lessons/:id" element={<LessonView />} />
+                <Route path="quizzes" element={<Quizzes />} />
                 <Route path="quiz/:id" element={<QuizPage />} />
                 <Route path="leaderboard" element={<Leaderboard />} />
                 <Route path="badges" element={<Badges />} />

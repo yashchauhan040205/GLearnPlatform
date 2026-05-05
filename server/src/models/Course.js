@@ -11,16 +11,17 @@ const courseSchema = new mongoose.Schema({
   
   modules: [{ type: mongoose.Schema.Types.ObjectId, ref: 'Lesson' }],
   enrolledStudents: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
-  
+
   price: { type: Number, default: 0 },
   requirements: [String],
   objectives: [String],
-  
+
   xpReward: { type: Number, default: 500 },
   pointsReward: { type: Number, default: 100 },
-  
+
   rating: { type: Number, default: 0, min: 0, max: 5 },
   ratingsCount: { type: Number, default: 0 },
+  enrollmentCount: { type: Number, default: 0 },
   
   isPublished: { type: Boolean, default: false },
   language: { type: String, default: 'English' },

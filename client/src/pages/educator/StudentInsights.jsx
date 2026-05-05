@@ -41,23 +41,23 @@ const StudentInsights = () => {
   return (
     <div className="space-y-6 animate-in">
       <div>
-        <h1 className="text-xl font-bold text-dark-100 flex items-center gap-2"><BarChart2 className="text-primary-600" size={20} />Student Insights</h1>
-        <p className="text-dark-400 mt-1">Performance overview across your courses</p>
+        <h1 className="text-xl font-bold text-gray-100 flex items-center gap-2"><BarChart2 className="text-indigo-600" size={20} />Student Insights</h1>
+        <p className="text-gray-400 mt-1">Performance overview across your courses</p>
       </div>
 
       {/* Summary Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         {[
-          { icon: Users, label: 'Total Students', value: data?.totalStudents ?? '—', color: 'text-primary-600' },
+          { icon: Users, label: 'Total Students', value: data?.totalStudents ?? '—', color: 'text-indigo-600' },
           { icon: TrendingUp, label: 'Avg Completion', value: data?.completionRate ? `${data.completionRate.toFixed(0)}%` : '—', color: 'text-emerald-500' },
-          { icon: Award, label: 'Avg Quiz Score', value: data?.avgQuizScore ? `${data.avgQuizScore.toFixed(0)}%` : '—', color: 'text-primary-400' },
+          { icon: Award, label: 'Avg Quiz Score', value: data?.avgQuizScore ? `${data.avgQuizScore.toFixed(0)}%` : '—', color: 'text-indigo-400' },
           { icon: BookOpen, label: 'Active Courses', value: data?.totalCourses ?? '—', color: 'text-rose-500' },
         ].map(({ icon: Icon, label, value, color }) => (
           <div key={label} className="card p-5 flex items-center gap-4">
-            <div className={`p-2.5 bg-dark-950 rounded-lg ${color}`}><Icon className="w-5 h-5" /></div>
+            <div className={`p-2.5 bg-gray-950 rounded-lg ${color}`}><Icon className="w-5 h-5" /></div>
             <div>
-              <p className="text-xl font-bold text-dark-100">{loading ? '...' : value}</p>
-              <p className="text-dark-400 text-sm">{label}</p>
+              <p className="text-xl font-bold text-gray-100">{loading ? '...' : value}</p>
+              <p className="text-gray-400 text-sm">{label}</p>
             </div>
           </div>
         ))}
@@ -66,7 +66,7 @@ const StudentInsights = () => {
       <div className="grid lg:grid-cols-2 gap-6">
         {/* Completion Chart */}
         <div className="card p-5">
-          <h2 className="text-dark-100 font-semibold mb-3 text-sm">Enrollment vs Completion</h2>
+          <h2 className="text-gray-100 font-semibold mb-3 text-sm">Enrollment vs Completion</h2>
           {!loading && data?.courseStats?.length ? (
             <Bar data={completionChart} options={CHART_OPTS} height={180} />
           ) : (
@@ -76,7 +76,7 @@ const StudentInsights = () => {
 
         {/* Quiz Score Chart */}
         <div className="card p-5">
-          <h2 className="text-dark-100 font-semibold mb-3 text-sm">Average Quiz Scores</h2>
+          <h2 className="text-gray-100 font-semibold mb-3 text-sm">Average Quiz Scores</h2>
           {!loading && data?.quizStats?.length ? (
             <Line data={scoreChart} options={CHART_OPTS} height={180} />
           ) : (
@@ -87,25 +87,25 @@ const StudentInsights = () => {
 
       {/* Top Students */}
       <div className="card p-5">
-        <h2 className="text-dark-100 font-semibold mb-3 text-sm">Top Performing Students</h2>
+        <h2 className="text-gray-100 font-semibold mb-3 text-sm">Top Performing Students</h2>
         {loading ? (
-          <div className="space-y-3">{[...Array(5)].map((_, i) => <div key={i} className="h-12 bg-dark-900 rounded-xl animate-pulse" />)}</div>
+          <div className="space-y-3">{[...Array(5)].map((_, i) => <div key={i} className="h-12 bg-gray-900 rounded-xl animate-pulse" />)}</div>
         ) : leaderboard.length === 0 ? (
           <p className="text-dark-500 text-center py-6">No student data available.</p>
         ) : (
           <div className="space-y-3">
             {leaderboard.map((student, i) => (
-              <div key={student._id} className="flex items-center gap-4 p-3 bg-dark-900 rounded-xl">
-                <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black ${i === 0 ? 'bg-primary-600 text-white' : i === 1 ? 'bg-slate-700 text-white' : i === 2 ? 'bg-dark-800 text-white' : 'bg-dark-900 text-dark-300'}`}>{i + 1}</span>
-                <div className="w-8 h-8 rounded-lg bg-primary-600 flex items-center justify-center text-white font-semibold text-sm">
+              <div key={student._id} className="flex items-center gap-4 p-3 bg-gray-900 rounded-xl">
+                <span className={`w-8 h-8 rounded-lg flex items-center justify-center text-sm font-black ${i === 0 ? 'bg-indigo-600 text-white' : i === 1 ? 'bg-slate-700 text-white' : i === 2 ? 'bg-gray-800 text-white' : 'bg-gray-900 text-gray-300'}`}>{i + 1}</span>
+                <div className="w-8 h-8 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-semibold text-sm">
                   {student.name?.charAt(0)}
                 </div>
                 <div className="flex-1">
-                  <p className="text-dark-100 text-sm font-medium">{student.name}</p>
+                  <p className="text-gray-100 text-sm font-medium">{student.name}</p>
                   <p className="text-dark-500 text-xs">{student.completedCourses?.length || 0} courses completed</p>
                 </div>
                 <div className="text-right">
-                  <p className="text-primary-400 font-bold text-sm">{student.xp?.toLocaleString()} XP</p>
+                  <p className="text-indigo-400 font-bold text-sm">{student.xp?.toLocaleString()} XP</p>
                   <p className="text-dark-500 text-xs">Level {student.level}</p>
                 </div>
               </div>

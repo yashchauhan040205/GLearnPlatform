@@ -8,12 +8,12 @@ import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Tooltip, Lege
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend)
 
-const StatCard = ({ icon: Icon, label, value, sub, color = 'text-primary-600' }) => (
+const StatCard = ({ icon: Icon, label, value, sub, color = 'text-indigo-600' }) => (
   <div className="card p-4 flex items-center gap-3">
-    <div className={`p-2.5 rounded-lg bg-dark-950 ${color}`}><Icon className="w-5 h-5" /></div>
+    <div className={`p-2.5 rounded-lg bg-gray-950 ${color}`}><Icon className="w-5 h-5" /></div>
     <div>
-      <p className="text-xl font-bold text-dark-100">{value}</p>
-      <p className="text-dark-400 text-sm">{label}</p>
+      <p className="text-xl font-bold text-gray-100">{value}</p>
+      <p className="text-gray-400 text-sm">{label}</p>
       {sub && <p className="text-xs text-dark-500">{sub}</p>}
     </div>
   </div>
@@ -46,8 +46,8 @@ const EducatorDashboard = () => {
     <div className="space-y-6 animate-in">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-xl font-bold text-dark-100">Educator Dashboard</h1>
-          <p className="text-dark-400 mt-1">Welcome back, {user?.name}!</p>
+          <h1 className="text-xl font-bold text-gray-100">Educator Dashboard</h1>
+          <p className="text-gray-400 mt-1">Welcome back, {user?.name}!</p>
         </div>
         <div className="flex gap-2">
           <Link to="/educator/courses/new" className="btn-primary flex items-center gap-2 text-sm"><PlusCircle className="w-4 h-4" />New Course</Link>
@@ -57,15 +57,15 @@ const EducatorDashboard = () => {
 
       {/* Stats */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard icon={BookOpen} label="My Courses" value={loading ? '...' : analytics?.totalCourses ?? 0} color="text-primary-600" />
+        <StatCard icon={BookOpen} label="My Courses" value={loading ? '...' : analytics?.totalCourses ?? 0} color="text-indigo-600" />
         <StatCard icon={Users} label="Total Students" value={loading ? '...' : analytics?.totalStudents ?? 0} color="text-emerald-500" />
-        <StatCard icon={Star} label="Avg Rating" value={loading ? '...' : analytics?.avgRating?.toFixed(1) ?? '—'} color="text-primary-400" />
+        <StatCard icon={Star} label="Avg Rating" value={loading ? '...' : analytics?.avgRating?.toFixed(1) ?? '—'} color="text-indigo-400" />
         <StatCard icon={TrendingUp} label="Completion Rate" value={loading ? '...' : `${analytics?.completionRate?.toFixed(0) ?? 0}%`} color="text-rose-500" />
       </div>
 
       {/* Course Performance Chart */}
       <div className="card p-5">
-        <h2 className="text-dark-100 font-semibold mb-3 text-sm flex items-center gap-2"><BarChart2 className="w-4 h-4 text-primary-600" />Course Performance</h2>
+        <h2 className="text-gray-100 font-semibold mb-3 text-sm flex items-center gap-2"><BarChart2 className="w-4 h-4 text-indigo-600" />Course Performance</h2>
         {!loading && analytics?.courseStats?.length > 0 ? (
           <Bar data={chartData} options={chartOptions} height={120} />
         ) : (
@@ -78,18 +78,18 @@ const EducatorDashboard = () => {
       {/* Recent Course List */}
       <div className="card p-5">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-dark-100 font-semibold text-sm">Your Courses</h2>
-          <Link to="/educator/courses" className="text-primary-400 text-sm hover:underline">View All</Link>
+          <h2 className="text-gray-100 font-semibold text-sm">Your Courses</h2>
+          <Link to="/educator/courses" className="text-indigo-400 text-sm hover:underline">View All</Link>
         </div>
         <div className="space-y-3">
-          {loading ? [...Array(3)].map((_, i) => <div key={i} className="h-14 bg-dark-900 rounded-xl animate-pulse" />) :
+          {loading ? [...Array(3)].map((_, i) => <div key={i} className="h-14 bg-gray-900 rounded-xl animate-pulse" />) :
             analytics?.courseStats?.slice(0, 5).map(course => (
-              <div key={course._id} className="flex items-center justify-between p-3 bg-dark-900 rounded-xl hover:bg-dark-800 transition-colors">
+              <div key={course._id} className="flex items-center justify-between p-3 bg-gray-900 rounded-xl hover:bg-gray-800 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="w-9 h-9 rounded-lg bg-primary-600/20 flex items-center justify-center"><BookOpen className="w-4 h-4 text-primary-400" /></div>
+                  <div className="w-9 h-9 rounded-lg bg-indigo-600/20 flex items-center justify-center"><BookOpen className="w-4 h-4 text-indigo-400" /></div>
                   <div>
-                    <p className="text-dark-100 text-sm font-medium">{course.title}</p>
-                    <p className="text-dark-400 text-xs">{course.enrollments} students · {course.completions} completions</p>
+                    <p className="text-gray-100 text-sm font-medium">{course.title}</p>
+                    <p className="text-gray-400 text-xs">{course.enrollments} students · {course.completions} completions</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-1 text-yellow-400">
@@ -101,7 +101,7 @@ const EducatorDashboard = () => {
           {!loading && !analytics?.courseStats?.length && (
             <div className="text-center py-8 text-dark-500">
               <BookOpen className="w-8 h-8 mx-auto mb-2 opacity-30" />
-              <p>No courses yet. <Link to="/educator/courses/new" className="text-primary-400 hover:underline">Create one!</Link></p>
+              <p>No courses yet. <Link to="/educator/courses/new" className="text-indigo-400 hover:underline">Create one!</Link></p>
             </div>
           )}
         </div>

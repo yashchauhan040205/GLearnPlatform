@@ -4,7 +4,7 @@ import api from '../../services/api'
 import toast from 'react-hot-toast'
 
 const ROLES = ['student', 'educator', 'admin']
-const ROLE_COLORS = { student: 'bg-primary-600/20 text-primary-400', educator: 'bg-green-600/20 text-green-400', admin: 'bg-red-600/20 text-red-400' }
+const ROLE_COLORS = { student: 'bg-indigo-600/20 text-indigo-400', educator: 'bg-green-600/20 text-green-400', admin: 'bg-red-600/20 text-red-400' }
 
 const ManageUsers = () => {
   const [users, setUsers] = useState([])
@@ -59,20 +59,20 @@ const ManageUsers = () => {
   return (
     <div className="space-y-6 animate-in">
       <div>
-        <h1 className="text-2xl font-black text-white flex items-center gap-2"><Users className="text-primary-400" />Manage Users</h1>
-        <p className="text-dark-400 mt-1">{total} total users</p>
+        <h1 className="text-2xl font-black text-white flex items-center gap-2"><Users className="text-indigo-400" />Manage Users</h1>
+        <p className="text-gray-400 mt-1">{total} total users</p>
       </div>
 
       {/* Filters */}
       <div className="flex gap-3 flex-wrap">
         <div className="relative flex-1 min-w-48">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-400" />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" />
           <input className="input w-full pl-9" placeholder="Search by name or email..." value={search} onChange={e => { setSearch(e.target.value); setPage(1) }} />
         </div>
         <div className="flex gap-2">
           {['all', ...ROLES].map(r => (
             <button key={r} onClick={() => { setRoleFilter(r); setPage(1) }}
-              className={`px-3 py-2 rounded-xl text-sm capitalize transition-all ${roleFilter === r ? 'bg-primary-600 text-white' : 'bg-dark-900 text-dark-400 border border-dark-800 hover:text-white'}`}>
+              className={`px-3 py-2 rounded-xl text-sm capitalize transition-all ${roleFilter === r ? 'bg-indigo-600 text-white' : 'bg-gray-900 text-gray-400 border border-gray-800 hover:text-white'}`}>
               {r}
             </button>
           ))}
@@ -84,26 +84,26 @@ const ManageUsers = () => {
         <div className="overflow-x-auto">
           <table className="w-full">
             <thead>
-              <tr className="border-b border-dark-700">
-                <th className="text-left text-dark-400 text-xs font-semibold uppercase tracking-wider px-5 py-4">User</th>
-                <th className="text-left text-dark-400 text-xs font-semibold uppercase tracking-wider px-5 py-4">Role</th>
-                <th className="text-left text-dark-400 text-xs font-semibold uppercase tracking-wider px-5 py-4 hidden md:table-cell">XP / Level</th>
-                <th className="text-left text-dark-400 text-xs font-semibold uppercase tracking-wider px-5 py-4 hidden lg:table-cell">Status</th>
-                <th className="text-right text-dark-400 text-xs font-semibold uppercase tracking-wider px-5 py-4">Actions</th>
+              <tr className="border-b border-gray-700">
+                <th className="text-left text-gray-400 text-xs font-semibold uppercase tracking-wider px-5 py-4">User</th>
+                <th className="text-left text-gray-400 text-xs font-semibold uppercase tracking-wider px-5 py-4">Role</th>
+                <th className="text-left text-gray-400 text-xs font-semibold uppercase tracking-wider px-5 py-4 hidden md:table-cell">XP / Level</th>
+                <th className="text-left text-gray-400 text-xs font-semibold uppercase tracking-wider px-5 py-4 hidden lg:table-cell">Status</th>
+                <th className="text-right text-gray-400 text-xs font-semibold uppercase tracking-wider px-5 py-4">Actions</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-dark-800">
+            <tbody className="divide-y divide-gray-800">
               {loading ? (
                 [...Array(8)].map((_, i) => (
-                  <tr key={i}><td colSpan={5} className="px-5 py-4"><div className="h-8 bg-dark-900 rounded animate-pulse" /></td></tr>
+                  <tr key={i}><td colSpan={5} className="px-5 py-4"><div className="h-8 bg-gray-900 rounded animate-pulse" /></td></tr>
                 ))
               ) : users.length === 0 ? (
                 <tr><td colSpan={5} className="text-center py-12 text-dark-500">No users found</td></tr>
               ) : users.map(user => (
-                <tr key={user._id} className="hover:bg-dark-800/50 transition-colors">
+                <tr key={user._id} className="hover:bg-gray-800/50 transition-colors">
                   <td className="px-5 py-4">
                     <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-primary-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shrink-0">{user.name?.charAt(0)}</div>
+                      <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white font-bold text-xs shrink-0">{user.name?.charAt(0)}</div>
                       <div>
                         <p className="text-white text-sm font-medium">{user.name}</p>
                         <p className="text-dark-500 text-xs">{user.email}</p>
@@ -113,7 +113,7 @@ const ManageUsers = () => {
                   <td className="px-5 py-4">
                     <select className={`text-xs px-2 py-1 rounded-full capitalize font-medium border-0 bg-transparent cursor-pointer ${ROLE_COLORS[user.role] || ''}`}
                       value={user.role} onChange={e => handleRoleChange(user._id, e.target.value)}>
-                      {ROLES.map(r => <option key={r} value={r} className="bg-dark-900 text-white capitalize">{r}</option>)}
+                      {ROLES.map(r => <option key={r} value={r} className="bg-gray-900 text-white capitalize">{r}</option>)}
                     </select>
                   </td>
                   <td className="px-5 py-4 hidden md:table-cell">
@@ -131,7 +131,7 @@ const ManageUsers = () => {
                         className={`p-1.5 rounded-lg transition-colors ${user.isActive !== false ? 'text-green-400 hover:bg-green-400/10' : 'text-red-400 hover:bg-red-400/10'}`}>
                         {user.isActive !== false ? <UserCheck className="w-4 h-4" /> : <UserX className="w-4 h-4" />}
                       </button>
-                      <button onClick={() => handleDelete(user._id, user.name)} className="p-1.5 rounded-lg text-dark-400 hover:text-red-400 hover:bg-red-400/10 transition-colors">
+                      <button onClick={() => handleDelete(user._id, user.name)} className="p-1.5 rounded-lg text-gray-400 hover:text-red-400 hover:bg-red-400/10 transition-colors">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -144,11 +144,11 @@ const ManageUsers = () => {
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-between px-5 py-4 border-t border-dark-700">
-            <p className="text-dark-400 text-sm">Page {page} of {totalPages}</p>
+          <div className="flex items-center justify-between px-5 py-4 border-t border-gray-700">
+            <p className="text-gray-400 text-sm">Page {page} of {totalPages}</p>
             <div className="flex gap-2">
-              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="px-3 py-1.5 rounded-lg bg-dark-900 text-sm text-dark-300 disabled:opacity-40 hover:bg-dark-800 transition-colors">Prev</button>
-              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="px-3 py-1.5 rounded-lg bg-dark-900 text-sm text-dark-300 disabled:opacity-40 hover:bg-dark-800 transition-colors">Next</button>
+              <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="px-3 py-1.5 rounded-lg bg-gray-900 text-sm text-gray-300 disabled:opacity-40 hover:bg-gray-800 transition-colors">Prev</button>
+              <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="px-3 py-1.5 rounded-lg bg-gray-900 text-sm text-gray-300 disabled:opacity-40 hover:bg-gray-800 transition-colors">Next</button>
             </div>
           </div>
         )}

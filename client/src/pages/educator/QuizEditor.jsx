@@ -7,7 +7,7 @@ import toast from 'react-hot-toast'
 const DEFAULT_QUESTION = { question: '', options: ['', '', '', ''], correctAnswer: 0, explanation: '', points: 10, difficulty: 'beginner' }
 const DIFFICULTIES = ['beginner', 'intermediate', 'advanced']
 
-const Field = ({ label, children }) => <div><label className="block text-dark-300 text-sm mb-2">{label}</label>{children}</div>
+const Field = ({ label, children }) => <div><label className="block text-gray-300 text-sm mb-2">{label}</label>{children}</div>
 
 const QuizEditor = () => {
   const { courseId, quizId } = useParams()
@@ -75,22 +75,22 @@ const QuizEditor = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-dark-900 hover:bg-dark-800 text-dark-300 hover:text-white transition-colors">
+        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="text-xl font-bold text-dark-100">{isEdit ? 'Edit Quiz' : 'Create Quiz'}</h1>
-          <p className="text-dark-400 text-sm">{questions.length} question{questions.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-xl font-bold text-gray-100">{isEdit ? 'Edit Quiz' : 'Create Quiz'}</h1>
+          <p className="text-gray-400 text-sm">{questions.length} question{questions.length !== 1 ? 's' : ''}</p>
         </div>
       </div>
 
       {loading ? (
-        <div className="space-y-4">{[...Array(3)].map((_, i) => <div key={i} className="h-20 bg-dark-900 rounded-xl animate-pulse" />)}</div>
+        <div className="space-y-4">{[...Array(3)].map((_, i) => <div key={i} className="h-20 bg-gray-900 rounded-xl animate-pulse" />)}</div>
       ) : (
         <>
           {/* Quiz Settings */}
           <div className="card p-6 space-y-4">
-            <h3 className="text-dark-100 font-semibold">Quiz Settings</h3>
+            <h3 className="text-gray-100 font-semibold">Quiz Settings</h3>
             <Field label="Quiz Title *">
               <input className="input w-full" placeholder="e.g. React Fundamentals Quiz" value={form.title} onChange={e => setForm(f => ({ ...f, title: e.target.value }))} />
             </Field>
@@ -109,7 +109,7 @@ const QuizEditor = () => {
           {questions.map((q, qi) => (
             <div key={qi} className="card p-6 space-y-4">
               <div className="flex items-center justify-between">
-                <h3 className="text-dark-100 font-semibold flex items-center gap-2"><HelpCircle className="w-4 h-4 text-primary-600" />Question {qi + 1}</h3>
+                <h3 className="text-gray-100 font-semibold flex items-center gap-2"><HelpCircle className="w-4 h-4 text-indigo-600" />Question {qi + 1}</h3>
                 {questions.length > 1 && (
                   <button onClick={() => removeQuestion(qi)} className="p-1.5 text-red-400 hover:bg-red-400/10 rounded-lg transition-colors"><Trash2 className="w-4 h-4" /></button>
                 )}
@@ -118,12 +118,12 @@ const QuizEditor = () => {
               <textarea className="input w-full resize-none" rows={2} placeholder="Enter question text..." value={q.question} onChange={e => updateQ(qi, 'question', e.target.value)} />
 
               <div>
-                <label className="block text-dark-300 text-sm mb-2">Options (select the correct answer)</label>
+                <label className="block text-gray-300 text-sm mb-2">Options (select the correct answer)</label>
                 <div className="space-y-2">
                   {q.options.map((opt, oi) => (
                     <div key={oi} className="flex items-center gap-3">
                       <button onClick={() => updateQ(qi, 'correctAnswer', oi)}
-                        className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${Number(q.correctAnswer) === oi ? 'border-green-500 bg-green-500' : 'border-dark-600 hover:border-dark-400'}`}>
+                        className={`w-6 h-6 rounded-full border-2 shrink-0 flex items-center justify-center transition-colors ${Number(q.correctAnswer) === oi ? 'border-green-500 bg-green-500' : 'border-dark-600 hover:border-gray-400'}`}>
                         {Number(q.correctAnswer) === oi && <CheckCheck className="w-3 h-3 text-white" />}
                       </button>
                       <input className="input flex-1 text-sm" placeholder={`Option ${oi + 1}`} value={opt} onChange={e => updateOption(qi, oi, e.target.value)} />
@@ -150,7 +150,7 @@ const QuizEditor = () => {
             </div>
           ))}
 
-          <button onClick={addQuestion} className="w-full py-4 border-2 border-dashed border-dark-700 text-dark-400 hover:text-primary-400 hover:border-primary-600 rounded-2xl transition-colors flex items-center justify-center gap-2">
+          <button onClick={addQuestion} className="w-full py-4 border-2 border-dashed border-gray-700 text-gray-400 hover:text-indigo-400 hover:border-indigo-600 rounded-2xl transition-colors flex items-center justify-center gap-2">
             <Plus className="w-5 h-5" />Add Question
           </button>
 

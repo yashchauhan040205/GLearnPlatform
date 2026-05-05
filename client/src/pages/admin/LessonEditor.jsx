@@ -12,7 +12,7 @@ const CONTENT_TYPES = [
 const DIFFICULTIES = ['beginner', 'intermediate', 'advanced']
 
 const Field = ({ label, children }) => (
-  <div><label className="block text-dark-300 text-sm mb-2">{label}</label>{children}</div>
+  <div><label className="block text-gray-300 text-sm mb-2">{label}</label>{children}</div>
 )
 
 const AdminLessonEditor = () => {
@@ -85,17 +85,17 @@ const AdminLessonEditor = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-dark-900 hover:bg-dark-800 text-dark-300 hover:text-white transition-colors">
+        <button onClick={() => navigate(-1)} className="p-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="text-xl font-bold text-dark-100">{isEdit ? 'Edit Lesson' : 'Create Lesson'}</h1>
-          <p className="text-dark-400 text-sm">Admin — Course content editor</p>
+          <h1 className="text-xl font-bold text-gray-100">{isEdit ? 'Edit Lesson' : 'Create Lesson'}</h1>
+          <p className="text-gray-400 text-sm">Admin — Course content editor</p>
         </div>
       </div>
 
       {loading ? (
-        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-dark-900 rounded-xl animate-pulse" />)}</div>
+        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-gray-900 rounded-xl animate-pulse" />)}</div>
       ) : (
         <>
           <div className="card p-6 space-y-5">
@@ -109,11 +109,11 @@ const AdminLessonEditor = () => {
 
             {/* Content Type */}
             <div>
-              <label className="block text-dark-300 text-sm mb-2">Content Type</label>
+              <label className="block text-gray-300 text-sm mb-2">Content Type</label>
               <div className="flex gap-3">
                 {CONTENT_TYPES.map(({ value, label, icon: Icon }) => (
                   <button key={value} onClick={() => setForm(f => ({ ...f, contentType: value }))}
-                    className={`flex-1 py-3 flex flex-col items-center gap-1 rounded-xl border text-sm transition-all ${form.contentType === value ? 'bg-primary-600/20 border-primary-500 text-primary-400' : 'border-dark-700 text-dark-400 hover:border-dark-500'}`}>
+                    className={`flex-1 py-3 flex flex-col items-center gap-1 rounded-xl border text-sm transition-all ${form.contentType === value ? 'bg-indigo-600/20 border-indigo-500 text-indigo-400' : 'border-gray-700 text-gray-400 hover:border-dark-500'}`}>
                     <Icon className="w-4 h-4" />{label}
                   </button>
                 ))}
@@ -146,7 +146,7 @@ const AdminLessonEditor = () => {
               <div className="flex gap-3">
                 {DIFFICULTIES.map(d => (
                   <button key={d} onClick={() => setForm(f => ({ ...f, difficulty: d }))}
-                    className={`flex-1 py-2 rounded-xl border text-sm capitalize transition-all ${form.difficulty === d ? 'bg-primary-600 border-primary-500 text-white' : 'border-dark-700 text-dark-400 hover:border-dark-500'}`}>
+                    className={`flex-1 py-2 rounded-xl border text-sm capitalize transition-all ${form.difficulty === d ? 'bg-indigo-600 border-indigo-500 text-white' : 'border-gray-700 text-gray-400 hover:border-dark-500'}`}>
                     {d}
                   </button>
                 ))}
@@ -157,8 +157,8 @@ const AdminLessonEditor = () => {
           {/* Resources */}
           <div className="card p-6 space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-dark-100 font-semibold">Resources</h3>
-              <button onClick={addResource} className="text-primary-400 text-sm flex items-center gap-1 hover:underline"><Plus className="w-4 h-4" />Add</button>
+              <h3 className="text-gray-100 font-semibold">Resources</h3>
+              <button onClick={addResource} className="text-indigo-400 text-sm flex items-center gap-1 hover:underline"><Plus className="w-4 h-4" />Add</button>
             </div>
             {resources.map((res, i) => (
               <div key={i} className="grid grid-cols-5 gap-2 items-center">

@@ -33,39 +33,39 @@ const DiscussionThread = ({ discussion, onLike, onReply, onResolve }) => {
       {/* Header */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-9 h-9 rounded-lg bg-primary-600 flex items-center justify-center text-white font-semibold text-sm">
+          <div className="w-9 h-9 rounded-lg bg-indigo-600 flex items-center justify-center text-white font-semibold text-sm">
             {discussion.author?.name?.charAt(0)}
           </div>
           <div>
-            <p className="text-dark-100 font-medium text-sm">{discussion.author?.name}</p>
+            <p className="text-gray-100 font-medium text-sm">{discussion.author?.name}</p>
             <p className="text-dark-500 text-xs">{timeAgo(discussion.createdAt)}</p>
           </div>
         </div>
         <div className="flex items-center gap-2">
-          {discussion.isPinned && <span className="flex items-center gap-1 text-primary-400 text-xs"><Pin className="w-3 h-3" />Pinned</span>}
+          {discussion.isPinned && <span className="flex items-center gap-1 text-indigo-400 text-xs"><Pin className="w-3 h-3" />Pinned</span>}
           {discussion.isResolved && <span className="flex items-center gap-1 text-emerald-500 text-xs"><CheckCircle className="w-3 h-3" />Resolved</span>}
           {(user?.role === 'educator' || user?.role === 'admin') && !discussion.isResolved && (
-            <button onClick={() => onResolve(discussion._id)} className="text-xs text-dark-400 hover:text-emerald-500 transition-colors">Mark Resolved</button>
+            <button onClick={() => onResolve(discussion._id)} className="text-xs text-gray-400 hover:text-emerald-500 transition-colors">Mark Resolved</button>
           )}
         </div>
       </div>
 
       {/* Title & Body */}
       <div>
-        <h3 className="text-dark-100 font-semibold mb-1">{discussion.title}</h3>
-        <p className="text-dark-300 text-sm leading-relaxed">{discussion.content}</p>
+        <h3 className="text-gray-100 font-semibold mb-1">{discussion.title}</h3>
+        <p className="text-gray-300 text-sm leading-relaxed">{discussion.content}</p>
       </div>
 
       {/* Actions */}
       <div className="flex items-center gap-4 text-sm">
-        <button onClick={() => onLike(discussion._id)} className={`flex items-center gap-1.5 transition-colors ${isLiked ? 'text-primary-600' : 'text-dark-400 hover:text-dark-100'}`}>
+        <button onClick={() => onLike(discussion._id)} className={`flex items-center gap-1.5 transition-colors ${isLiked ? 'text-indigo-600' : 'text-gray-400 hover:text-gray-100'}`}>
           <ThumbsUp className="w-4 h-4" />{discussion.likes?.length || 0}
         </button>
-        <button onClick={() => setShowReplyBox(!showReplyBox)} className="flex items-center gap-1.5 text-dark-400 hover:text-dark-100 transition-colors">
+        <button onClick={() => setShowReplyBox(!showReplyBox)} className="flex items-center gap-1.5 text-gray-400 hover:text-gray-100 transition-colors">
           <Reply className="w-4 h-4" />Reply
         </button>
         {discussion.replies?.length > 0 && (
-          <button onClick={() => setShowReplies(!showReplies)} className="flex items-center gap-1.5 text-dark-400 hover:text-dark-100 transition-colors ml-auto">
+          <button onClick={() => setShowReplies(!showReplies)} className="flex items-center gap-1.5 text-gray-400 hover:text-gray-100 transition-colors ml-auto">
             {showReplies ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
             {discussion.replies.length} {discussion.replies.length === 1 ? 'reply' : 'replies'}
           </button>
@@ -74,7 +74,7 @@ const DiscussionThread = ({ discussion, onLike, onReply, onResolve }) => {
 
       {/* Reply Box */}
       {showReplyBox && (
-        <div className="flex gap-2 pt-2 border-t border-dark-700">
+        <div className="flex gap-2 pt-2 border-t border-gray-700">
           <input className="input flex-1 text-sm" placeholder="Write a reply..." value={replyText} onChange={e => setReplyText(e.target.value)}
             onKeyDown={e => e.key === 'Enter' && !e.shiftKey && submitReply()} />
           <button onClick={submitReply} disabled={loadingReply} className="btn-primary px-3 py-2">
@@ -85,15 +85,15 @@ const DiscussionThread = ({ discussion, onLike, onReply, onResolve }) => {
 
       {/* Replies */}
       {showReplies && discussion.replies?.length > 0 && (
-        <div className="space-y-3 pt-2 border-t border-dark-700 pl-4">
+        <div className="space-y-3 pt-2 border-t border-gray-700 pl-4">
           {discussion.replies.map(reply => (
             <div key={reply._id} className="flex items-start gap-3">
               <div className="w-7 h-7 rounded-lg bg-rose-500 flex items-center justify-center text-white font-semibold text-xs shrink-0">
                 {reply.author?.name?.charAt(0)}
               </div>
-              <div className="flex-1 bg-dark-950 rounded-lg px-3 py-2">
-                <p className="text-dark-100 text-xs font-medium">{reply.author?.name} <span className="text-dark-500 font-normal">{timeAgo(reply.createdAt)}</span></p>
-                <p className="text-dark-300 text-sm mt-0.5">{reply.content}</p>
+              <div className="flex-1 bg-gray-950 rounded-lg px-3 py-2">
+                <p className="text-gray-100 text-xs font-medium">{reply.author?.name} <span className="text-dark-500 font-normal">{timeAgo(reply.createdAt)}</span></p>
+                <p className="text-gray-300 text-sm mt-0.5">{reply.content}</p>
               </div>
             </div>
           ))}
@@ -153,8 +153,8 @@ const Discussions = () => {
     <div className="space-y-6 animate-in">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold text-dark-100 flex items-center gap-2"><MessageSquare className="text-primary-600" size={20} />Discussions</h1>
-          <p className="text-dark-400 mt-1">{discussions.length} thread{discussions.length !== 1 ? 's' : ''}</p>
+          <h1 className="text-xl font-bold text-gray-100 flex items-center gap-2"><MessageSquare className="text-indigo-600" size={20} />Discussions</h1>
+          <p className="text-gray-400 mt-1">{discussions.length} thread{discussions.length !== 1 ? 's' : ''}</p>
         </div>
         <button onClick={() => setShowNew(!showNew)} className="btn-primary flex items-center gap-2">
           <Plus className="w-4 h-4" />New Thread
@@ -163,8 +163,8 @@ const Discussions = () => {
 
       {/* New Thread Form */}
       {showNew && (
-        <div className="card p-4 space-y-3 border-primary-200">
-          <h3 className="text-dark-100 font-semibold text-sm">New Discussion</h3>
+        <div className="card p-4 space-y-3 border-indigo-200">
+          <h3 className="text-gray-100 font-semibold text-sm">New Discussion</h3>
           <input className="input w-full" placeholder="Title" value={newPost.title} onChange={e => setNewPost(p => ({ ...p, title: e.target.value }))} />
           <textarea className="input w-full h-28 resize-none" placeholder="Describe your question or topic..." value={newPost.content} onChange={e => setNewPost(p => ({ ...p, content: e.target.value }))} />
           <div className="flex gap-3">
@@ -178,7 +178,7 @@ const Discussions = () => {
 
       {/* Threads */}
       {loading ? (
-        <div className="space-y-4">{[...Array(3)].map((_, i) => <div key={i} className="h-36 bg-dark-900 rounded-lg animate-pulse" />)}</div>
+        <div className="space-y-4">{[...Array(3)].map((_, i) => <div key={i} className="h-36 bg-gray-900 rounded-lg animate-pulse" />)}</div>
       ) : discussions.length === 0 ? (
         <div className="text-center py-20 text-dark-500">
           <MessageSquare className="w-12 h-12 mx-auto mb-3 opacity-30" />

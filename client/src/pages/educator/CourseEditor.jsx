@@ -9,7 +9,7 @@ const LEVELS = ['beginner', 'intermediate', 'advanced']
 
 const Field = ({ label, children, hint }) => (
   <div>
-    <label className="block text-dark-300 text-sm mb-2">{label}</label>
+    <label className="block text-gray-300 text-sm mb-2">{label}</label>
     {children}
     {hint && <p className="text-dark-500 text-xs mt-1">{hint}</p>}
   </div>
@@ -87,17 +87,17 @@ const CourseEditor = () => {
   return (
     <div className="max-w-3xl mx-auto space-y-6 animate-in">
       <div className="flex items-center gap-4">
-        <button onClick={() => navigate('/educator/courses')} className="p-2 rounded-xl bg-dark-900 hover:bg-dark-800 text-dark-300 hover:text-white transition-colors">
+        <button onClick={() => navigate('/educator/courses')} className="p-2 rounded-xl bg-gray-900 hover:bg-gray-800 text-gray-300 hover:text-white transition-colors">
           <ArrowLeft className="w-5 h-5" />
         </button>
         <div>
-          <h1 className="text-xl font-bold text-dark-100">{isEdit ? 'Edit Course' : 'Create Course'}</h1>
-          <p className="text-dark-400 text-sm">{isEdit ? 'Update course details' : 'Fill in the details to publish your course'}</p>
+          <h1 className="text-xl font-bold text-gray-100">{isEdit ? 'Edit Course' : 'Create Course'}</h1>
+          <p className="text-gray-400 text-sm">{isEdit ? 'Update course details' : 'Fill in the details to publish your course'}</p>
         </div>
       </div>
 
       {loading ? (
-        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-dark-900 rounded-xl animate-pulse" />)}</div>
+        <div className="space-y-4">{[...Array(4)].map((_, i) => <div key={i} className="h-16 bg-gray-900 rounded-xl animate-pulse" />)}</div>
       ) : (
         <div className="card p-6 space-y-5">
           <Field label="Course Title *">

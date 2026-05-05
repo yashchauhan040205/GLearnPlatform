@@ -61,7 +61,7 @@ const LessonView = () => {
     } catch (_) {} finally { setCompleting(false) }
   }
 
-  if (loading) return <div className="flex justify-center items-center h-64"><div className="w-8 h-8 border-3 border-primary-500 border-t-transparent rounded-full animate-spin" /></div>
+  if (loading) return <div className="flex justify-center items-center h-64"><div className="w-8 h-8 border-3 border-indigo-500 border-t-transparent rounded-full animate-spin" /></div>
   if (!lesson) return null
 
   const currentIdx = courseLessons.findIndex(l => l._id === id)
@@ -72,7 +72,7 @@ const LessonView = () => {
     <div className="max-w-4xl mx-auto space-y-4 animate-in">
       {/* Back + progress */}
       <div className="flex items-center justify-between">
-        <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-dark-400 hover:text-dark-100 transition-colors text-sm">
+        <button onClick={() => navigate(-1)} className="flex items-center gap-2 text-gray-400 hover:text-gray-100 transition-colors text-sm">
           <ChevronLeft size={16} />Back to course
         </button>
         {lesson.course && (
@@ -85,18 +85,18 @@ const LessonView = () => {
         <div className="flex items-start justify-between gap-4">
           <div className="flex-1">
             <div className="flex flex-wrap gap-2 mb-2">
-              <span className="text-xs bg-primary-900/20 text-primary-400 px-2 py-0.5 rounded border border-primary-700/40">
+              <span className="text-xs bg-indigo-900/20 text-indigo-400 px-2 py-0.5 rounded border border-primary-700/40">
                 Chapter {currentIdx + 1} of {courseLessons.length}
               </span>
-              <span className="text-xs bg-dark-900 text-dark-400 px-2 py-0.5 rounded">{lesson.contentType}</span>
-              <span className="text-xs bg-dark-900 text-dark-400 px-2 py-0.5 rounded capitalize">{lesson.difficulty}</span>
+              <span className="text-xs bg-gray-900 text-gray-400 px-2 py-0.5 rounded">{lesson.contentType}</span>
+              <span className="text-xs bg-gray-900 text-gray-400 px-2 py-0.5 rounded capitalize">{lesson.difficulty}</span>
               {lesson.duration > 0 && <span className="text-xs text-dark-500 flex items-center gap-1"><Clock size={10} />{formatDuration(lesson.duration)}</span>}
             </div>
-            <h1 className="text-xl font-bold text-dark-100">{lesson.title}</h1>
-            {lesson.description && <p className="text-dark-400 text-sm mt-1">{lesson.description}</p>}
+            <h1 className="text-xl font-bold text-gray-100">{lesson.title}</h1>
+            {lesson.description && <p className="text-gray-400 text-sm mt-1">{lesson.description}</p>}
           </div>
           <div className="text-right shrink-0">
-            <div className="text-primary-400 font-semibold flex items-center gap-1"><Zap size={14} />+{lesson.xpReward} XP</div>
+            <div className="text-indigo-400 font-semibold flex items-center gap-1"><Zap size={14} />+{lesson.xpReward} XP</div>
             <div className="text-dark-500 text-xs">+{lesson.pointsReward} pts</div>
           </div>
         </div>
@@ -108,13 +108,13 @@ const LessonView = () => {
           <div className="flex items-start gap-3">
             <Trophy size={16} className="text-emerald-400 mt-0.5 shrink-0" />
             <div className="flex-1">
-              <h3 className="text-dark-200 font-medium text-sm mb-1">Complete to earn rewards</h3>
+              <h3 className="text-gray-200 font-medium text-sm mb-1">Complete to earn rewards</h3>
               <div className="flex flex-wrap items-center gap-3 text-xs">
                 <span className="flex items-center gap-1 text-emerald-400"><Zap size={11} />+{lesson.xpReward} XP</span>
                 <span className="text-dark-500">·</span>
                 <span className="flex items-center gap-1 text-amber-400"><Star size={11} />+{lesson.pointsReward} Points</span>
                 <span className="text-dark-500">·</span>
-                <span className="flex items-center gap-1 text-primary-400"><TrendingUp size={11} />Leaderboard</span>
+                <span className="flex items-center gap-1 text-indigo-400"><TrendingUp size={11} />Leaderboard</span>
                 {user?.streak >= 3 && (
                   <>
                     <span className="text-dark-500">·</span>
@@ -134,7 +134,7 @@ const LessonView = () => {
             <CheckCircle size={18} className="text-emerald-400 shrink-0" />
             <div>
               <h3 className="text-emerald-400 font-medium text-sm">Chapter Completed</h3>
-              <p className="text-dark-400 text-xs">You earned {lesson.xpReward} XP from this chapter</p>
+              <p className="text-gray-400 text-xs">You earned {lesson.xpReward} XP from this chapter</p>
             </div>
           </div>
         </div>
@@ -143,7 +143,7 @@ const LessonView = () => {
       {/* Video */}
       {lesson.videoUrl && (
         <div className="card p-0 overflow-hidden">
-          <div className="aspect-video bg-dark-950 flex items-center justify-center">
+          <div className="aspect-video bg-gray-950 flex items-center justify-center">
             {lesson.videoUrl.includes('youtube') || lesson.videoUrl.includes('youtu.be') ? (
               <iframe className="w-full h-full" src={lesson.videoUrl.replace('watch?v=', 'embed/')} title="Video" allowFullScreen />
             ) : (
@@ -156,17 +156,17 @@ const LessonView = () => {
       {/* Content */}
       {lesson.content && (
         <div className="card prose max-w-none">
-          <div className="text-dark-300 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: lesson.content }} />
+          <div className="text-gray-300 text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: lesson.content }} />
         </div>
       )}
 
       {/* Resources */}
       {lesson.resources?.length > 0 && (
         <div className="card">
-          <h3 className="text-dark-100 font-semibold mb-2 text-sm">Resources</h3>
+          <h3 className="text-gray-100 font-semibold mb-2 text-sm">Resources</h3>
           <div className="space-y-1.5">
             {lesson.resources.map((r, i) => (
-              <a key={i} href={r.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-primary-400 hover:text-primary-300 text-sm transition-colors">
+              <a key={i} href={r.url} target="_blank" rel="noreferrer" className="flex items-center gap-2 text-indigo-400 hover:text-indigo-300 text-sm transition-colors">
                 <BookOpen size={13} />{r.title}
               </a>
             ))}

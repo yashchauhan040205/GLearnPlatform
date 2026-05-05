@@ -34,28 +34,28 @@ const Login = () => {
   }
 
   return (
-    <div className="min-h-screen bg-dark-950 flex items-center justify-center px-4">
+    <div className="min-h-screen bg-gradient-to-b from-white via-emerald-50/60 to-white flex items-center justify-center px-4">
       <div className="w-full max-w-sm">
         {/* Logo */}
         <div className="text-center mb-6">
           <Link to="/" className="inline-flex items-center gap-2 mb-4">
-            <div className="w-8 h-8 bg-primary-600 rounded-md flex items-center justify-center">
+            <div className="w-8 h-8 bg-emerald-600 rounded-md flex items-center justify-center">
               <BookOpen size={16} className="text-white" />
             </div>
-            <span className="text-dark-100 font-semibold">GLearnPlatform</span>
+            <span className="text-slate-900 font-semibold">GLearnPlatform</span>
           </Link>
-          <h1 className="text-xl font-bold text-dark-100">Welcome back</h1>
-          <p className="text-dark-400 text-sm mt-1">Sign in to your account</p>
+          <h1 className="text-xl font-bold text-slate-900">Welcome back</h1>
+          <p className="text-slate-500 text-sm mt-1">Sign in to your account</p>
         </div>
 
         {/* Card */}
-        <div className="bg-dark-900 border border-dark-800 rounded-2xl p-6 space-y-4">
+        <div className="bg-white border border-emerald-100 rounded-2xl p-6 space-y-4 shadow-sm">
           <form onSubmit={handleSubmit} className="space-y-3">
             {/* Email */}
             <div>
               <label className="label">Email</label>
               <div className="relative">
-                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-500" />
+                <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
                   type="email"
                   name="email"
@@ -72,7 +72,7 @@ const Login = () => {
             <div>
               <label className="label">Password</label>
               <div className="relative">
-                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-dark-500" />
+                <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
                 <input
                   type={showPassword ? 'text' : 'password'}
                   name="password"
@@ -85,7 +85,7 @@ const Login = () => {
                 <button
                   type="button"
                   onClick={() => setShowPassword(s => !s)}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 text-dark-500 hover:text-dark-300 transition-colors"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-emerald-600 transition-colors"
                 >
                   {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                 </button>
@@ -101,21 +101,14 @@ const Login = () => {
             </button>
           </form>
 
-          <p className="text-center text-dark-400 text-sm">
+          <p className="text-center text-slate-500 text-sm">
             Don't have an account?{' '}
-            <Link to="/register" className="text-primary-400 hover:text-primary-300 font-medium transition-colors">
+            <Link to="/register" className="text-emerald-600 hover:text-emerald-500 font-medium transition-colors">
               Sign up
             </Link>
           </p>
         </div>
 
-        {/* Demo accounts */}
-        <div className="mt-3 p-3 bg-dark-900 rounded-lg border border-dark-800 text-xs text-dark-400 space-y-1">
-          <p className="text-dark-200 font-medium mb-1.5">Demo accounts:</p>
-          <p>Student — <span className="text-primary-400">alex@example.com</span> / student123</p>
-          <p>Educator — <span className="text-emerald-400">educator@glearnplatform.com</span> / educator123</p>
-          <p>Admin — <span className="text-rose-400">admin@glearnplatform.com</span> / admin123</p>
-        </div>
       </div>
     </div>
   )

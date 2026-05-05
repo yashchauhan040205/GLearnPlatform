@@ -29,7 +29,7 @@ const DashboardLayout = () => {
   }, [user])
 
   return (
-    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-dark-950 via-slate-950 to-dark-900">
+    <div className="flex h-screen overflow-hidden bg-gradient-to-br from-white via-emerald-50/60 to-white text-slate-800">
       {/* Sidebar */}
       <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
@@ -46,7 +46,7 @@ const DashboardLayout = () => {
       {/* Mobile sidebar overlay */}
       {sidebarOpen && (
         <div
-          className="fixed inset-0 bg-black/30 z-30 md:hidden"
+          className="fixed inset-0 bg-emerald-950/15 z-30 md:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}

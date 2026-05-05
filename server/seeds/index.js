@@ -21,6 +21,15 @@ const seedBadges = [
   { name: 'Marathon Learner', description: 'Maintain a 30-day streak', icon: '🌟', color: '#FFD700', category: 'streak', tier: 'gold', criteria: { type: 'streak', threshold: 30 }, xpReward: 1500, pointsReward: 400 },
   { name: 'Polymath', description: 'Complete 5 courses', icon: '🧠', color: '#E5E4E2', category: 'course', tier: 'platinum', criteria: { type: 'courses', threshold: 5 }, xpReward: 2500, pointsReward: 600 },
   { name: 'Legend', description: 'Earn 25000 XP', icon: '💎', color: '#B9F2FF', category: 'achievement', tier: 'diamond', criteria: { type: 'xp', threshold: 25000 }, xpReward: 5000, pointsReward: 1500 },
+  { name: 'Quiz Master', description: 'Pass 5 quizzes', icon: '🎯', color: '#CD7F32', category: 'quiz', tier: 'bronze', criteria: { type: 'quizzes', threshold: 5 }, xpReward: 250, pointsReward: 50 },
+  { name: 'Rapid Learner', description: 'Complete 5 lessons in one day', icon: '⚙️', color: '#C0C0C0', category: 'achievement', tier: 'silver', criteria: { type: 'lessons', threshold: 5 }, xpReward: 400, pointsReward: 100 },
+  { name: 'Perfect Score', description: 'Score 100% on a quiz', icon: '✨', color: '#FFD700', category: 'quiz', tier: 'gold', criteria: { type: 'score', threshold: 100 }, xpReward: 800, pointsReward: 200 },
+  { name: 'Consistent Learner', description: 'Maintain a 14-day streak', icon: '💪', color: '#C0C0C0', category: 'streak', tier: 'silver', criteria: { type: 'streak', threshold: 14 }, xpReward: 350, pointsReward: 80 },
+  { name: 'Course Collector', description: 'Enroll in 10 courses', icon: '📖', color: '#FFD700', category: 'course', tier: 'gold', criteria: { type: 'courses', threshold: 10 }, xpReward: 1200, pointsReward: 300 },
+  { name: 'High Achiever', description: 'Earn 10000 XP', icon: '🚀', color: '#E5E4E2', category: 'achievement', tier: 'platinum', criteria: { type: 'xp', threshold: 10000 }, xpReward: 2000, pointsReward: 500 },
+  { name: 'Eternal Learner', description: 'Maintain a 60-day streak', icon: '🌈', color: '#E5E4E2', category: 'streak', tier: 'platinum', criteria: { type: 'streak', threshold: 60 }, xpReward: 3000, pointsReward: 800 },
+  { name: 'Super Genius', description: 'Earn 50000 XP', icon: '🔮', color: '#B9F2FF', category: 'achievement', tier: 'diamond', criteria: { type: 'xp', threshold: 50000 }, xpReward: 8000, pointsReward: 2500 },
+  { name: 'Quiz Legend', description: 'Pass 25 quizzes', icon: '🏅', color: '#B9F2FF', category: 'quiz', tier: 'diamond', criteria: { type: 'quizzes', threshold: 25 }, xpReward: 3500, pointsReward: 1000 },
 ];
 
 const seedDatabase = async () => {
@@ -248,7 +257,7 @@ const seedDatabase = async () => {
         duration: 15, 
         xpReward: 50, 
         pointsReward: 10, 
-        difficulty: 'easy' 
+        difficulty: 'beginner' 
       },
       { 
         title: 'CSS Fundamentals', 
@@ -371,7 +380,7 @@ const seedDatabase = async () => {
         duration: 20, 
         xpReward: 60, 
         pointsReward: 12, 
-        difficulty: 'easy' 
+        difficulty: 'beginner' 
       },
       { 
         title: 'JavaScript Basics', 
@@ -527,7 +536,7 @@ element.addEventListener("click", () => {
         duration: 25, 
         xpReward: 75, 
         pointsReward: 15, 
-        difficulty: 'medium' 
+        difficulty: 'intermediate' 
       },
       { 
         title: 'React.js Introduction', 
@@ -708,7 +717,7 @@ function DataFetcher() {
         duration: 30, 
         xpReward: 100, 
         pointsReward: 20, 
-        difficulty: 'medium' 
+        difficulty: 'intermediate' 
       },
       { 
         title: 'Building Your First React App', 
@@ -1007,7 +1016,7 @@ h1 {
         duration: 45, 
         xpReward: 150, 
         pointsReward: 30, 
-        difficulty: 'hard' 
+        difficulty: 'advanced' 
       },
     ]);
     await Course.findByIdAndUpdate(courses[0]._id, { modules: course0Lessons.map(l => l._id) });
@@ -1126,7 +1135,7 @@ print(f"Predicted price: \\$\\{prediction[0]:,.0f}")</code></pre>
         duration: 20, 
         xpReward: 60, 
         pointsReward: 15, 
-        difficulty: 'easy' 
+        difficulty: 'beginner' 
       },
       { 
         title: 'Python for Data Science', 
@@ -1338,7 +1347,7 @@ plt.show()</code></pre>
         duration: 30, 
         xpReward: 80, 
         pointsReward: 20, 
-        difficulty: 'medium' 
+        difficulty: 'intermediate' 
       },
       { 
         title: 'Supervised Learning Algorithms', 
@@ -1554,7 +1563,7 @@ print(classification_report(y_test, y_pred))</code></pre>
         duration: 40, 
         xpReward: 120, 
         pointsReward: 30, 
-        difficulty: 'medium' 
+        difficulty: 'intermediate' 
       },
       { 
         title: 'Neural Networks Fundamentals', 
@@ -1803,7 +1812,7 @@ print(f"Test accuracy: {test_acc * 100:.2f}%")</code></pre>
         duration: 45, 
         xpReward: 150, 
         pointsReward: 35, 
-        difficulty: 'hard' 
+        difficulty: 'advanced' 
       },
       { 
         title: 'Building ML Models with TensorFlow', 
@@ -2152,7 +2161,7 @@ with open('model.tflite', 'wb') as f:
         duration: 50, 
         xpReward: 180, 
         pointsReward: 45, 
-        difficulty: 'hard' 
+        difficulty: 'advanced' 
       },
     ]);
     await Course.findByIdAndUpdate(courses[1]._id, { modules: course1Lessons.map(l => l._id) });
@@ -2160,152 +2169,152 @@ with open('model.tflite', 'wb') as f:
 
     // Course 2: Data Structures & Algorithms
     const course2Lessons = await Lesson.insertMany([
-      { title: 'Big O Notation Explained', course: courses[2]._id, order: 1, contentType: 'text', content: '<h2>Algorithm Complexity</h2><p>Understanding time and space complexity...</p>', duration: 25, xpReward: 70, pointsReward: 15, difficulty: 'medium' },
-      { title: 'Arrays and Linked Lists', course: courses[2]._id, order: 2, contentType: 'text', content: '<h2>Linear Data Structures</h2><p>Master arrays, linked lists, and their operations...</p>', duration: 30, xpReward: 85, pointsReward: 20, difficulty: 'medium' },
-      { title: 'Stacks, Queues & Hash Tables', course: courses[2]._id, order: 3, contentType: 'text', content: '<h2>ADTs</h2><p>Abstract data types and their implementations...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'medium' },
-      { title: 'Trees and Graph Algorithms', course: courses[2]._id, order: 4, contentType: 'text', content: '<h2>Non-Linear Structures</h2><p>Binary trees, BSTs, and graph traversal...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'hard' },
-      { title: 'Dynamic Programming Mastery', course: courses[2]._id, order: 5, contentType: 'text', content: '<h2>Advanced Techniques</h2><p>Solve complex problems with DP...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'hard' },
+      { title: 'Big O Notation Explained', course: courses[2]._id, order: 1, contentType: 'text', content: '<h2>Algorithm Complexity</h2><p>Understanding time and space complexity...</p>', duration: 25, xpReward: 70, pointsReward: 15, difficulty: 'intermediate' },
+      { title: 'Arrays and Linked Lists', course: courses[2]._id, order: 2, contentType: 'text', content: '<h2>Linear Data Structures</h2><p>Master arrays, linked lists, and their operations...</p>', duration: 30, xpReward: 85, pointsReward: 20, difficulty: 'intermediate' },
+      { title: 'Stacks, Queues & Hash Tables', course: courses[2]._id, order: 3, contentType: 'text', content: '<h2>ADTs</h2><p>Abstract data types and their implementations...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'intermediate' },
+      { title: 'Trees and Graph Algorithms', course: courses[2]._id, order: 4, contentType: 'text', content: '<h2>Non-Linear Structures</h2><p>Binary trees, BSTs, and graph traversal...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'advanced' },
+      { title: 'Dynamic Programming Mastery', course: courses[2]._id, order: 5, contentType: 'text', content: '<h2>Advanced Techniques</h2><p>Solve complex problems with DP...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[2]._id, { modules: course2Lessons.map(l => l._id) });
     allLessons.push(...course2Lessons);
 
     // Course 3: UI/UX Design Fundamentals
     const course3Lessons = await Lesson.insertMany([
-      { title: 'Design Thinking Process', course: courses[3]._id, order: 1, contentType: 'text', content: '<h2>User-Centered Design</h2><p>Learn the design thinking methodology...</p>', duration: 20, xpReward: 50, pointsReward: 12, difficulty: 'easy' },
-      { title: 'Wireframing & Prototyping', course: courses[3]._id, order: 2, contentType: 'text', content: '<h2>Low to High Fidelity</h2><p>Create wireframes and interactive prototypes...</p>', duration: 25, xpReward: 65, pointsReward: 16, difficulty: 'easy' },
-      { title: 'Color Theory & Typography', course: courses[3]._id, order: 3, contentType: 'text', content: '<h2>Visual Design Principles</h2><p>Master color schemes and font pairing...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'medium' },
-      { title: 'Figma Professional Workflows', course: courses[3]._id, order: 4, contentType: 'text', content: '<h2>Design Tools Mastery</h2><p>Advanced Figma techniques and components...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'medium' },
+      { title: 'Design Thinking Process', course: courses[3]._id, order: 1, contentType: 'text', content: '<h2>User-Centered Design</h2><p>Learn the design thinking methodology...</p>', duration: 20, xpReward: 50, pointsReward: 12, difficulty: 'beginner' },
+      { title: 'Wireframing & Prototyping', course: courses[3]._id, order: 2, contentType: 'text', content: '<h2>Low to High Fidelity</h2><p>Create wireframes and interactive prototypes...</p>', duration: 25, xpReward: 65, pointsReward: 16, difficulty: 'beginner' },
+      { title: 'Color Theory & Typography', course: courses[3]._id, order: 3, contentType: 'text', content: '<h2>Visual Design Principles</h2><p>Master color schemes and font pairing...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'intermediate' },
+      { title: 'Figma Professional Workflows', course: courses[3]._id, order: 4, contentType: 'text', content: '<h2>Design Tools Mastery</h2><p>Advanced Figma techniques and components...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'intermediate' },
     ]);
     await Course.findByIdAndUpdate(courses[3]._id, { modules: course3Lessons.map(l => l._id) });
     allLessons.push(...course3Lessons);
 
     // Course 4: React Native Mobile Development
     const course4Lessons = await Lesson.insertMany([
-      { title: 'React Native Setup & Basics', course: courses[4]._id, order: 1, contentType: 'text', content: '<h2>Getting Started</h2><p>Set up your React Native development environment...</p>', duration: 25, xpReward: 70, pointsReward: 17, difficulty: 'easy' },
-      { title: 'Core Components & Styling', course: courses[4]._id, order: 2, contentType: 'text', content: '<h2>Building UI</h2><p>Learn View, Text, Image, and StyleSheet...</p>', duration: 30, xpReward: 85, pointsReward: 21, difficulty: 'medium' },
-      { title: 'Navigation & State Management', course: courses[4]._id, order: 3, contentType: 'text', content: '<h2>App Architecture</h2><p>React Navigation and Context API...</p>', duration: 40, xpReward: 110, pointsReward: 27, difficulty: 'medium' },
-      { title: 'Native Features & APIs', course: courses[4]._id, order: 4, contentType: 'text', content: '<h2>Device Integration</h2><p>Camera, location, notifications and more...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'hard' },
-      { title: 'Publishing to App Stores', course: courses[4]._id, order: 5, contentType: 'text', content: '<h2>Deployment</h2><p>Build and deploy to iOS App Store and Google Play...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'hard' },
+      { title: 'React Native Setup & Basics', course: courses[4]._id, order: 1, contentType: 'text', content: '<h2>Getting Started</h2><p>Set up your React Native development environment...</p>', duration: 25, xpReward: 70, pointsReward: 17, difficulty: 'beginner' },
+      { title: 'Core Components & Styling', course: courses[4]._id, order: 2, contentType: 'text', content: '<h2>Building UI</h2><p>Learn View, Text, Image, and StyleSheet...</p>', duration: 30, xpReward: 85, pointsReward: 21, difficulty: 'intermediate' },
+      { title: 'Navigation & State Management', course: courses[4]._id, order: 3, contentType: 'text', content: '<h2>App Architecture</h2><p>React Navigation and Context API...</p>', duration: 40, xpReward: 110, pointsReward: 27, difficulty: 'intermediate' },
+      { title: 'Native Features & APIs', course: courses[4]._id, order: 4, contentType: 'text', content: '<h2>Device Integration</h2><p>Camera, location, notifications and more...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'advanced' },
+      { title: 'Publishing to App Stores', course: courses[4]._id, order: 5, contentType: 'text', content: '<h2>Deployment</h2><p>Build and deploy to iOS App Store and Google Play...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[4]._id, { modules: course4Lessons.map(l => l._id) });
     allLessons.push(...course4Lessons);
 
     // Course 5: Python for Data Science
     const course5Lessons = await Lesson.insertMany([
-      { title: 'Python Fundamentals Review', course: courses[5]._id, order: 1, contentType: 'text', content: '<h2>Python Essentials</h2><p>Quick review of Python syntax and concepts...</p>', duration: 20, xpReward: 55, pointsReward: 14, difficulty: 'easy' },
-      { title: 'NumPy for Numerical Computing', course: courses[5]._id, order: 2, contentType: 'text', content: '<h2>Array Operations</h2><p>Master NumPy arrays and mathematical operations...</p>', duration: 30, xpReward: 75, pointsReward: 19, difficulty: 'medium' },
-      { title: 'Pandas Data Manipulation', course: courses[5]._id, order: 3, contentType: 'text', content: '<h2>DataFrames</h2><p>Clean, transform, and analyze data with pandas...</p>', duration: 35, xpReward: 95, pointsReward: 24, difficulty: 'medium' },
-      { title: 'Data Visualization with Matplotlib', course: courses[5]._id, order: 4, contentType: 'text', content: '<h2>Plotting Data</h2><p>Create stunning visualizations...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'medium' },
-      { title: 'Real-World Data Analysis Project', course: courses[5]._id, order: 5, contentType: 'text', content: '<h2>Capstone Project</h2><p>Analyze a real dataset from start to finish...</p>', duration: 50, xpReward: 150, pointsReward: 37, difficulty: 'hard' },
+      { title: 'Python Fundamentals Review', course: courses[5]._id, order: 1, contentType: 'text', content: '<h2>Python Essentials</h2><p>Quick review of Python syntax and concepts...</p>', duration: 20, xpReward: 55, pointsReward: 14, difficulty: 'beginner' },
+      { title: 'NumPy for Numerical Computing', course: courses[5]._id, order: 2, contentType: 'text', content: '<h2>Array Operations</h2><p>Master NumPy arrays and mathematical operations...</p>', duration: 30, xpReward: 75, pointsReward: 19, difficulty: 'intermediate' },
+      { title: 'Pandas Data Manipulation', course: courses[5]._id, order: 3, contentType: 'text', content: '<h2>DataFrames</h2><p>Clean, transform, and analyze data with pandas...</p>', duration: 35, xpReward: 95, pointsReward: 24, difficulty: 'intermediate' },
+      { title: 'Data Visualization with Matplotlib', course: courses[5]._id, order: 4, contentType: 'text', content: '<h2>Plotting Data</h2><p>Create stunning visualizations...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'intermediate' },
+      { title: 'Real-World Data Analysis Project', course: courses[5]._id, order: 5, contentType: 'text', content: '<h2>Capstone Project</h2><p>Analyze a real dataset from start to finish...</p>', duration: 50, xpReward: 150, pointsReward: 37, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[5]._id, { modules: course5Lessons.map(l => l._id) });
     allLessons.push(...course5Lessons);
 
     // Course 6: Cloud Computing with AWS
     const course6Lessons = await Lesson.insertMany([
-      { title: 'AWS Cloud Fundamentals', course: courses[6]._id, order: 1, contentType: 'text', content: '<h2>Introduction to AWS</h2><p>Understanding cloud computing and AWS services...</p>', duration: 30, xpReward: 90, pointsReward: 22, difficulty: 'medium' },
-      { title: 'EC2 & Compute Services', course: courses[6]._id, order: 2, contentType: 'text', content: '<h2>Virtual Servers</h2><p>Launch and manage EC2 instances...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'medium' },
-      { title: 'S3 & Storage Solutions', course: courses[6]._id, order: 3, contentType: 'text', content: '<h2>Object Storage</h2><p>Store and retrieve data with S3...</p>', duration: 35, xpReward: 110, pointsReward: 27, difficulty: 'medium' },
-      { title: 'Lambda & Serverless Architecture', course: courses[6]._id, order: 4, contentType: 'text', content: '<h2>Serverless Computing</h2><p>Build without managing servers...</p>', duration: 45, xpReward: 150, pointsReward: 37, difficulty: 'hard' },
-      { title: 'AWS Security & Best Practices', course: courses[6]._id, order: 5, contentType: 'text', content: '<h2>Cloud Security</h2><p>IAM, VPC, and security implementation...</p>', duration: 50, xpReward: 180, pointsReward: 45, difficulty: 'hard' },
+      { title: 'AWS Cloud Fundamentals', course: courses[6]._id, order: 1, contentType: 'text', content: '<h2>Introduction to AWS</h2><p>Understanding cloud computing and AWS services...</p>', duration: 30, xpReward: 90, pointsReward: 22, difficulty: 'intermediate' },
+      { title: 'EC2 & Compute Services', course: courses[6]._id, order: 2, contentType: 'text', content: '<h2>Virtual Servers</h2><p>Launch and manage EC2 instances...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'intermediate' },
+      { title: 'S3 & Storage Solutions', course: courses[6]._id, order: 3, contentType: 'text', content: '<h2>Object Storage</h2><p>Store and retrieve data with S3...</p>', duration: 35, xpReward: 110, pointsReward: 27, difficulty: 'intermediate' },
+      { title: 'Lambda & Serverless Architecture', course: courses[6]._id, order: 4, contentType: 'text', content: '<h2>Serverless Computing</h2><p>Build without managing servers...</p>', duration: 45, xpReward: 150, pointsReward: 37, difficulty: 'advanced' },
+      { title: 'AWS Security & Best Practices', course: courses[6]._id, order: 5, contentType: 'text', content: '<h2>Cloud Security</h2><p>IAM, VPC, and security implementation...</p>', duration: 50, xpReward: 180, pointsReward: 45, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[6]._id, { modules: course6Lessons.map(l => l._id) });
     allLessons.push(...course6Lessons);
 
     // Course 7: Cybersecurity Essentials
     const course7Lessons = await Lesson.insertMany([
-      { title: 'Security Fundamentals', course: courses[7]._id, order: 1, contentType: 'text', content: '<h2>CIA Triad</h2><p>Confidentiality, Integrity, and Availability...</p>', duration: 25, xpReward: 70, pointsReward: 17, difficulty: 'easy' },
-      { title: 'Network Security Basics', course: courses[7]._id, order: 2, contentType: 'text', content: '<h2>Securing Networks</h2><p>Firewalls, VPNs, and network protocols...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'medium' },
-      { title: 'Cryptography & Encryption', course: courses[7]._id, order: 3, contentType: 'text', content: '<h2>Protecting Data</h2><p>Symmetric, asymmetric encryption and hashing...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'medium' },
-      { title: 'Ethical Hacking Techniques', course: courses[7]._id, order: 4, contentType: 'text', content: '<h2>Penetration Testing</h2><p>Learn to think like a hacker...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'hard' },
-      { title: 'Incident Response & Recovery', course: courses[7]._id, order: 5, contentType: 'text', content: '<h2>Handling Breaches</h2><p>Respond to and recover from security incidents...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'hard' },
+      { title: 'Security Fundamentals', course: courses[7]._id, order: 1, contentType: 'text', content: '<h2>CIA Triad</h2><p>Confidentiality, Integrity, and Availability...</p>', duration: 25, xpReward: 70, pointsReward: 17, difficulty: 'beginner' },
+      { title: 'Network Security Basics', course: courses[7]._id, order: 2, contentType: 'text', content: '<h2>Securing Networks</h2><p>Firewalls, VPNs, and network protocols...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'intermediate' },
+      { title: 'Cryptography & Encryption', course: courses[7]._id, order: 3, contentType: 'text', content: '<h2>Protecting Data</h2><p>Symmetric, asymmetric encryption and hashing...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'intermediate' },
+      { title: 'Ethical Hacking Techniques', course: courses[7]._id, order: 4, contentType: 'text', content: '<h2>Penetration Testing</h2><p>Learn to think like a hacker...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'advanced' },
+      { title: 'Incident Response & Recovery', course: courses[7]._id, order: 5, contentType: 'text', content: '<h2>Handling Breaches</h2><p>Respond to and recover from security incidents...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[7]._id, { modules: course7Lessons.map(l => l._id) });
     allLessons.push(...course7Lessons);
 
     // Course 8: Full-Stack JavaScript
     const course8Lessons = await Lesson.insertMany([
-      { title: 'MERN Stack Overview', course: courses[8]._id, order: 1, contentType: 'text', content: '<h2>Full-Stack Architecture</h2><p>Understanding the MERN stack ecosystem...</p>', duration: 25, xpReward: 75, pointsReward: 18, difficulty: 'medium' },
-      { title: 'MongoDB & Database Design', course: courses[8]._id, order: 2, contentType: 'text', content: '<h2>NoSQL Databases</h2><p>Schema design and CRUD operations...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'medium' },
-      { title: 'Express.js REST APIs', course: courses[8]._id, order: 3, contentType: 'text', content: '<h2>Backend Development</h2><p>Build RESTful APIs with Express...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'medium' },
-      { title: 'React Frontend Integration', course: courses[8]._id, order: 4, contentType: 'text', content: '<h2>Connecting Frontend</h2><p>State management and API integration...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'hard' },
-      { title: 'Authentication & Deployment', course: courses[8]._id, order: 5, contentType: 'text', content: '<h2>Production Ready</h2><p>JWT auth and cloud deployment...</p>', duration: 50, xpReward: 165, pointsReward: 41, difficulty: 'hard' },
+      { title: 'MERN Stack Overview', course: courses[8]._id, order: 1, contentType: 'text', content: '<h2>Full-Stack Architecture</h2><p>Understanding the MERN stack ecosystem...</p>', duration: 25, xpReward: 75, pointsReward: 18, difficulty: 'intermediate' },
+      { title: 'MongoDB & Database Design', course: courses[8]._id, order: 2, contentType: 'text', content: '<h2>NoSQL Databases</h2><p>Schema design and CRUD operations...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'intermediate' },
+      { title: 'Express.js REST APIs', course: courses[8]._id, order: 3, contentType: 'text', content: '<h2>Backend Development</h2><p>Build RESTful APIs with Express...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'intermediate' },
+      { title: 'React Frontend Integration', course: courses[8]._id, order: 4, contentType: 'text', content: '<h2>Connecting Frontend</h2><p>State management and API integration...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'advanced' },
+      { title: 'Authentication & Deployment', course: courses[8]._id, order: 5, contentType: 'text', content: '<h2>Production Ready</h2><p>JWT auth and cloud deployment...</p>', duration: 50, xpReward: 165, pointsReward: 41, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[8]._id, { modules: course8Lessons.map(l => l._id) });
     allLessons.push(...course8Lessons);
 
     // Course 9: Digital Marketing Masterclass
     const course9Lessons = await Lesson.insertMany([
-      { title: 'Digital Marketing Foundations', course: courses[9]._id, order: 1, contentType: 'text', content: '<h2>Marketing Basics</h2><p>Core concepts and strategies...</p>', duration: 20, xpReward: 50, pointsReward: 12, difficulty: 'easy' },
-      { title: 'SEO & Content Strategy', course: courses[9]._id, order: 2, contentType: 'text', content: '<h2>Search Optimization</h2><p>Rank higher on Google...</p>', duration: 30, xpReward: 75, pointsReward: 18, difficulty: 'medium' },
-      { title: 'Social Media Marketing', course: courses[9]._id, order: 3, contentType: 'text', content: '<h2>Social Platforms</h2><p>Facebook, Instagram, LinkedIn strategies...</p>', duration: 35, xpReward: 90, pointsReward: 22, difficulty: 'medium' },
-      { title: 'Google Analytics & Metrics', course: courses[9]._id, order: 4, contentType: 'text', content: '<h2>Data-Driven Marketing</h2><p>Track and analyze campaign performance...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'medium' },
+      { title: 'Digital Marketing Foundations', course: courses[9]._id, order: 1, contentType: 'text', content: '<h2>Marketing Basics</h2><p>Core concepts and strategies...</p>', duration: 20, xpReward: 50, pointsReward: 12, difficulty: 'beginner' },
+      { title: 'SEO & Content Strategy', course: courses[9]._id, order: 2, contentType: 'text', content: '<h2>Search Optimization</h2><p>Rank higher on Google...</p>', duration: 30, xpReward: 75, pointsReward: 18, difficulty: 'intermediate' },
+      { title: 'Social Media Marketing', course: courses[9]._id, order: 3, contentType: 'text', content: '<h2>Social Platforms</h2><p>Facebook, Instagram, LinkedIn strategies...</p>', duration: 35, xpReward: 90, pointsReward: 22, difficulty: 'intermediate' },
+      { title: 'Google Analytics & Metrics', course: courses[9]._id, order: 4, contentType: 'text', content: '<h2>Data-Driven Marketing</h2><p>Track and analyze campaign performance...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'intermediate' },
     ]);
     await Course.findByIdAndUpdate(courses[9]._id, { modules: course9Lessons.map(l => l._id) });
     allLessons.push(...course9Lessons);
 
     // Course 10: Blockchain & Cryptocurrency
     const course10Lessons = await Lesson.insertMany([
-      { title: 'Blockchain Technology Basics', course: courses[10]._id, order: 1, contentType: 'text', content: '<h2>What is Blockchain?</h2><p>Distributed ledger technology explained...</p>', duration: 30, xpReward: 90, pointsReward: 22, difficulty: 'medium' },
-      { title: 'Cryptocurrency Fundamentals', course: courses[10]._id, order: 2, contentType: 'text', content: '<h2>Bitcoin & Ethereum</h2><p>Understanding digital currencies...</p>', duration: 35, xpReward: 105, pointsReward: 26, difficulty: 'medium' },
-      { title: 'Smart Contracts with Solidity', course: courses[10]._id, order: 3, contentType: 'text', content: '<h2>Programming Blockchain</h2><p>Write smart contracts on Ethereum...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'hard' },
-      { title: 'DeFi & Web3 Applications', course: courses[10]._id, order: 4, contentType: 'text', content: '<h2>Decentralized Finance</h2><p>Build dApps and DeFi protocols...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'hard' },
-      { title: 'NFTs & Token Economics', course: courses[10]._id, order: 5, contentType: 'text', content: '<h2>Digital Assets</h2><p>Create and trade NFTs...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'hard' },
+      { title: 'Blockchain Technology Basics', course: courses[10]._id, order: 1, contentType: 'text', content: '<h2>What is Blockchain?</h2><p>Distributed ledger technology explained...</p>', duration: 30, xpReward: 90, pointsReward: 22, difficulty: 'intermediate' },
+      { title: 'Cryptocurrency Fundamentals', course: courses[10]._id, order: 2, contentType: 'text', content: '<h2>Bitcoin & Ethereum</h2><p>Understanding digital currencies...</p>', duration: 35, xpReward: 105, pointsReward: 26, difficulty: 'intermediate' },
+      { title: 'Smart Contracts with Solidity', course: courses[10]._id, order: 3, contentType: 'text', content: '<h2>Programming Blockchain</h2><p>Write smart contracts on Ethereum...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'advanced' },
+      { title: 'DeFi & Web3 Applications', course: courses[10]._id, order: 4, contentType: 'text', content: '<h2>Decentralized Finance</h2><p>Build dApps and DeFi protocols...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'advanced' },
+      { title: 'NFTs & Token Economics', course: courses[10]._id, order: 5, contentType: 'text', content: '<h2>Digital Assets</h2><p>Create and trade NFTs...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[10]._id, { modules: course10Lessons.map(l => l._id) });
     allLessons.push(...course10Lessons);
 
     // Course 11: Deep Learning & Neural Networks
     const course11Lessons = await Lesson.insertMany([
-      { title: 'Neural Network Architecture', course: courses[11]._id, order: 1, contentType: 'text', content: '<h2>Deep Learning Fundamentals</h2><p>Neurons, layers, and activation functions...</p>', duration: 35, xpReward: 110, pointsReward: 27, difficulty: 'medium' },
-      { title: 'Convolutional Neural Networks', course: courses[11]._id, order: 2, contentType: 'text', content: '<h2>Computer Vision</h2><p>CNNs for image recognition...</p>', duration: 45, xpReward: 145, pointsReward: 36, difficulty: 'hard' },
-      { title: 'Recurrent Neural Networks', course: courses[11]._id, order: 3, contentType: 'text', content: '<h2>Sequence Models</h2><p>RNNs and LSTMs for time series...</p>', duration: 50, xpReward: 165, pointsReward: 41, difficulty: 'hard' },
-      { title: 'Generative Adversarial Networks', course: courses[11]._id, order: 4, contentType: 'text', content: '<h2>GANs</h2><p>Generate realistic images and data...</p>', duration: 55, xpReward: 185, pointsReward: 46, difficulty: 'hard' },
-      { title: 'Transformer Models & Attention', course: courses[11]._id, order: 5, contentType: 'text', content: '<h2>Modern NLP</h2><p>BERT, GPT, and attention mechanisms...</p>', duration: 60, xpReward: 200, pointsReward: 50, difficulty: 'hard' },
+      { title: 'Neural Network Architecture', course: courses[11]._id, order: 1, contentType: 'text', content: '<h2>Deep Learning Fundamentals</h2><p>Neurons, layers, and activation functions...</p>', duration: 35, xpReward: 110, pointsReward: 27, difficulty: 'intermediate' },
+      { title: 'Convolutional Neural Networks', course: courses[11]._id, order: 2, contentType: 'text', content: '<h2>Computer Vision</h2><p>CNNs for image recognition...</p>', duration: 45, xpReward: 145, pointsReward: 36, difficulty: 'advanced' },
+      { title: 'Recurrent Neural Networks', course: courses[11]._id, order: 3, contentType: 'text', content: '<h2>Sequence Models</h2><p>RNNs and LSTMs for time series...</p>', duration: 50, xpReward: 165, pointsReward: 41, difficulty: 'advanced' },
+      { title: 'Generative Adversarial Networks', course: courses[11]._id, order: 4, contentType: 'text', content: '<h2>GANs</h2><p>Generate realistic images and data...</p>', duration: 55, xpReward: 185, pointsReward: 46, difficulty: 'advanced' },
+      { title: 'Transformer Models & Attention', course: courses[11]._id, order: 5, contentType: 'text', content: '<h2>Modern NLP</h2><p>BERT, GPT, and attention mechanisms...</p>', duration: 60, xpReward: 200, pointsReward: 50, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[11]._id, { modules: course11Lessons.map(l => l._id) });
     allLessons.push(...course11Lessons);
 
     // Course 12: Graphic Design with Adobe Suite
     const course12Lessons = await Lesson.insertMany([
-      { title: 'Adobe Creative Cloud Setup', course: courses[12]._id, order: 1, contentType: 'text', content: '<h2>Getting Started</h2><p>Install and navigate Adobe apps...</p>', duration: 20, xpReward: 55, pointsReward: 13, difficulty: 'easy' },
-      { title: 'Photoshop Essentials', course: courses[12]._id, order: 2, contentType: 'text', content: '<h2>Photo Editing</h2><p>Layers, masks, and retouching...</p>', duration: 35, xpReward: 95, pointsReward: 23, difficulty: 'medium' },
-      { title: 'Illustrator Vector Graphics', course: courses[12]._id, order: 3, contentType: 'text', content: '<h2>Logo Design</h2><p>Create scalable vector artwork...</p>', duration: 40, xpReward: 115, pointsReward: 28, difficulty: 'medium' },
-      { title: 'InDesign Layout Design', course: courses[12]._id, order: 4, contentType: 'text', content: '<h2>Print & Digital</h2><p>Design magazines and brochures...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'medium' },
-      { title: 'Portfolio Design Project', course: courses[12]._id, order: 5, contentType: 'text', content: '<h2>Showcase Your Work</h2><p>Create a professional portfolio...</p>', duration: 45, xpReward: 135, pointsReward: 33, difficulty: 'hard' },
+      { title: 'Adobe Creative Cloud Setup', course: courses[12]._id, order: 1, contentType: 'text', content: '<h2>Getting Started</h2><p>Install and navigate Adobe apps...</p>', duration: 20, xpReward: 55, pointsReward: 13, difficulty: 'beginner' },
+      { title: 'Photoshop Essentials', course: courses[12]._id, order: 2, contentType: 'text', content: '<h2>Photo Editing</h2><p>Layers, masks, and retouching...</p>', duration: 35, xpReward: 95, pointsReward: 23, difficulty: 'intermediate' },
+      { title: 'Illustrator Vector Graphics', course: courses[12]._id, order: 3, contentType: 'text', content: '<h2>Logo Design</h2><p>Create scalable vector artwork...</p>', duration: 40, xpReward: 115, pointsReward: 28, difficulty: 'intermediate' },
+      { title: 'InDesign Layout Design', course: courses[12]._id, order: 4, contentType: 'text', content: '<h2>Print & Digital</h2><p>Design magazines and brochures...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'intermediate' },
+      { title: 'Portfolio Design Project', course: courses[12]._id, order: 5, contentType: 'text', content: '<h2>Showcase Your Work</h2><p>Create a professional portfolio...</p>', duration: 45, xpReward: 135, pointsReward: 33, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[12]._id, { modules: course12Lessons.map(l => l._id) });
     allLessons.push(...course12Lessons);
 
     // Course 13: iOS Development with Swift
     const course13Lessons = await Lesson.insertMany([
-      { title: 'Swift Language Basics', course: courses[13]._id, order: 1, contentType: 'text', content: '<h2>Swift Programming</h2><p>Learn Swift syntax and fundamentals...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'medium' },
-      { title: 'UIKit Fundamentals', course: courses[13]._id, order: 2, contentType: 'text', content: '<h2>Building UI</h2><p>Views, controllers, and storyboards...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'medium' },
-      { title: 'SwiftUI Modern Development', course: courses[13]._id, order: 3, contentType: 'text', content: '<h2>Declarative UI</h2><p>Build apps with SwiftUI...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'medium' },
-      { title: 'Core Data & Persistence', course: courses[13]._id, order: 4, contentType: 'text', content: '<h2>Data Storage</h2><p>Save and retrieve app data...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'hard' },
-      { title: 'App Store Submission', course: courses[13]._id, order: 5, contentType: 'text', content: '<h2>Publishing iOS Apps</h2><p>Submit to the App Store...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'hard' },
+      { title: 'Swift Language Basics', course: courses[13]._id, order: 1, contentType: 'text', content: '<h2>Swift Programming</h2><p>Learn Swift syntax and fundamentals...</p>', duration: 30, xpReward: 80, pointsReward: 20, difficulty: 'intermediate' },
+      { title: 'UIKit Fundamentals', course: courses[13]._id, order: 2, contentType: 'text', content: '<h2>Building UI</h2><p>Views, controllers, and storyboards...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'intermediate' },
+      { title: 'SwiftUI Modern Development', course: courses[13]._id, order: 3, contentType: 'text', content: '<h2>Declarative UI</h2><p>Build apps with SwiftUI...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'intermediate' },
+      { title: 'Core Data & Persistence', course: courses[13]._id, order: 4, contentType: 'text', content: '<h2>Data Storage</h2><p>Save and retrieve app data...</p>', duration: 45, xpReward: 140, pointsReward: 35, difficulty: 'advanced' },
+      { title: 'App Store Submission', course: courses[13]._id, order: 5, contentType: 'text', content: '<h2>Publishing iOS Apps</h2><p>Submit to the App Store...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[13]._id, { modules: course13Lessons.map(l => l._id) });
     allLessons.push(...course13Lessons);
 
     // Course 14: DevOps Engineering
     const course14Lessons = await Lesson.insertMany([
-      { title: 'DevOps Culture & Principles', course: courses[14]._id, order: 1, contentType: 'text', content: '<h2>DevOps Mindset</h2><p>Collaboration, automation, and CI/CD...</p>', duration: 25, xpReward: 75, pointsReward: 18, difficulty: 'medium' },
-      { title: 'Docker Containerization', course: courses[14]._id, order: 2, contentType: 'text', content: '<h2>Containers</h2><p>Build and manage Docker containers...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'medium' },
-      { title: 'Kubernetes Orchestration', course: courses[14]._id, order: 3, contentType: 'text', content: '<h2>Container Orchestration</h2><p>Deploy and scale with Kubernetes...</p>', duration: 50, xpReward: 160, pointsReward: 40, difficulty: 'hard' },
-      { title: 'CI/CD with Jenkins', course: courses[14]._id, order: 4, contentType: 'text', content: '<h2>Automation Pipelines</h2><p>Automate testing and deployment...</p>', duration: 45, xpReward: 145, pointsReward: 36, difficulty: 'hard' },
-      { title: 'Infrastructure as Code', course: courses[14]._id, order: 5, contentType: 'text', content: '<h2>Terraform & Ansible</h2><p>Manage infrastructure with code...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'hard' },
+      { title: 'DevOps Culture & Principles', course: courses[14]._id, order: 1, contentType: 'text', content: '<h2>DevOps Mindset</h2><p>Collaboration, automation, and CI/CD...</p>', duration: 25, xpReward: 75, pointsReward: 18, difficulty: 'intermediate' },
+      { title: 'Docker Containerization', course: courses[14]._id, order: 2, contentType: 'text', content: '<h2>Containers</h2><p>Build and manage Docker containers...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'intermediate' },
+      { title: 'Kubernetes Orchestration', course: courses[14]._id, order: 3, contentType: 'text', content: '<h2>Container Orchestration</h2><p>Deploy and scale with Kubernetes...</p>', duration: 50, xpReward: 160, pointsReward: 40, difficulty: 'advanced' },
+      { title: 'CI/CD with Jenkins', course: courses[14]._id, order: 4, contentType: 'text', content: '<h2>Automation Pipelines</h2><p>Automate testing and deployment...</p>', duration: 45, xpReward: 145, pointsReward: 36, difficulty: 'advanced' },
+      { title: 'Infrastructure as Code', course: courses[14]._id, order: 5, contentType: 'text', content: '<h2>Terraform & Ansible</h2><p>Manage infrastructure with code...</p>', duration: 50, xpReward: 170, pointsReward: 42, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[14]._id, { modules: course14Lessons.map(l => l._id) });
     allLessons.push(...course14Lessons);
 
     // Course 15: Game Development with Unity
     const course15Lessons = await Lesson.insertMany([
-      { title: 'Unity Interface & Basics', course: courses[15]._id, order: 1, contentType: 'text', content: '<h2>Getting Started</h2><p>Navigate the Unity editor...</p>', duration: 25, xpReward: 70, pointsReward: 17, difficulty: 'easy' },
-      { title: 'C# Scripting for Unity', course: courses[15]._id, order: 2, contentType: 'text', content: '<h2>Game Programming</h2><p>Learn C# for game development...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'medium' },
-      { title: '2D Game Development', course: courses[15]._id, order: 3, contentType: 'text', content: '<h2>2D Platformer</h2><p>Create your first 2D game...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'medium' },
-      { title: '3D Game Mechanics', course: courses[15]._id, order: 4, contentType: 'text', content: '<h2>3D World Building</h2><p>Physics, lighting, and animation...</p>', duration: 50, xpReward: 150, pointsReward: 37, difficulty: 'hard' },
-      { title: 'Publishing Your Game', course: courses[15]._id, order: 5, contentType: 'text', content: '<h2>Game Release</h2><p>Build and publish to platforms...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'hard' },
+      { title: 'Unity Interface & Basics', course: courses[15]._id, order: 1, contentType: 'text', content: '<h2>Getting Started</h2><p>Navigate the Unity editor...</p>', duration: 25, xpReward: 70, pointsReward: 17, difficulty: 'beginner' },
+      { title: 'C# Scripting for Unity', course: courses[15]._id, order: 2, contentType: 'text', content: '<h2>Game Programming</h2><p>Learn C# for game development...</p>', duration: 35, xpReward: 100, pointsReward: 25, difficulty: 'intermediate' },
+      { title: '2D Game Development', course: courses[15]._id, order: 3, contentType: 'text', content: '<h2>2D Platformer</h2><p>Create your first 2D game...</p>', duration: 40, xpReward: 120, pointsReward: 30, difficulty: 'intermediate' },
+      { title: '3D Game Mechanics', course: courses[15]._id, order: 4, contentType: 'text', content: '<h2>3D World Building</h2><p>Physics, lighting, and animation...</p>', duration: 50, xpReward: 150, pointsReward: 37, difficulty: 'advanced' },
+      { title: 'Publishing Your Game', course: courses[15]._id, order: 5, contentType: 'text', content: '<h2>Game Release</h2><p>Build and publish to platforms...</p>', duration: 40, xpReward: 130, pointsReward: 32, difficulty: 'advanced' },
     ]);
     await Course.findByIdAndUpdate(courses[15]._id, { modules: course15Lessons.map(l => l._id) });
     allLessons.push(...course15Lessons);
@@ -2319,7 +2328,7 @@ with open('model.tflite', 'wb') as f:
         description: 'Test your knowledge of HTML basics',
         course: courses[0]._id,
         lesson: course0Lessons[0]._id,
-        difficulty: 'easy',
+        difficulty: 'beginner',
         xpReward: 100,
         pointsReward: 25,
         timeLimit: 10,
@@ -2336,7 +2345,7 @@ with open('model.tflite', 'wb') as f:
         title: 'JavaScript Basics Quiz',
         course: courses[0]._id,
         lesson: course0Lessons[2]._id,
-        difficulty: 'medium',
+        difficulty: 'intermediate',
         xpReward: 150,
         pointsReward: 40,
         timeLimit: 15,
@@ -2345,6 +2354,73 @@ with open('model.tflite', 'wb') as f:
           { question: 'Which keyword declares a block-scoped variable in JavaScript?', options: ['var', 'let', 'define', 'scope'], correctAnswer: 1, explanation: '"let" is block-scoped, unlike "var"', points: 15 },
           { question: 'What is the output of: typeof null?', options: ['"null"', '"undefined"', '"object"', '"boolean"'], correctAnswer: 2, explanation: 'typeof null returns "object" - a known JS quirk', points: 15 },
           { question: 'Which method removes the last element from an array?', options: ['pop()', 'push()', 'shift()', 'unshift()'], correctAnswer: 0, explanation: 'Array.pop() removes and returns the last element', points: 15 },
+          { question: 'What does the === operator do?', options: ['Compares values loosely', 'Compares values and types strictly', 'Assigns a value', 'Multiplies numbers'], correctAnswer: 1, explanation: '=== checks for both value and type equality', points: 15 },
+          { question: 'Which is the correct way to write a function in JavaScript?', options: ['function = myFunc() {}', 'function myFunc() {}', 'func myFunc() {}', 'def myFunc() {}'], correctAnswer: 1, explanation: 'function myFunc() {} is the correct syntax', points: 15 },
+        ],
+      },
+      {
+        title: 'React Fundamentals Quiz',
+        course: courses[0]._id,
+        lesson: course0Lessons[3]._id,
+        difficulty: 'intermediate',
+        xpReward: 200,
+        pointsReward: 50,
+        timeLimit: 15,
+        passingScore: 65,
+        questions: [
+          { question: 'What is JSX?', options: ['Java Syntax Extension', 'JavaScript XML', 'JavaScript Extra', 'Just Something eXtended'], correctAnswer: 1, explanation: 'JSX allows you to write HTML-like syntax in JavaScript', points: 20 },
+          { question: 'How do you pass data from parent to child in React?', options: ['Using state', 'Using props', 'Using context', 'Using refs'], correctAnswer: 1, explanation: 'Props are used to pass data from parent to child components', points: 20 },
+          { question: 'What hook manages local state in functional components?', options: ['useEffect', 'useState', 'useContext', 'useReducer'], correctAnswer: 1, explanation: 'useState hook allows you to add state to functional components', points: 20 },
+          { question: 'When does useEffect run?', options: ['Only once on mount', 'After every render', 'Only on state change', 'It depends on the dependency array'], correctAnswer: 3, explanation: 'useEffect behavior depends on the dependency array provided', points: 20 },
+        ],
+      },
+      {
+        title: 'CSS & Styling Quiz',
+        course: courses[0]._id,
+        lesson: course0Lessons[1]._id,
+        difficulty: 'beginner',
+        xpReward: 120,
+        pointsReward: 30,
+        timeLimit: 12,
+        passingScore: 70,
+        questions: [
+          { question: 'What does CSS stand for?', options: ['Computer Style Sheets', 'Cascading Style Sheets', 'Creative Style System', 'none'], correctAnswer: 1, explanation: 'CSS = Cascading Style Sheets', points: 10 },
+          { question: 'Which selector targets all elements with a specific class?', options: ['.className', '#className', '*className', '+className'], correctAnswer: 0, explanation: 'The dot (.) selector targets classes', points: 10 },
+          { question: 'What is the correct CSS syntax for changing text color?', options: ['textcolor: red', 'color: red', 'text-color: red', 'font-color: red'], correctAnswer: 1, explanation: 'The color property changes text color', points: 10 },
+          { question: 'Which CSS property controls spacing outside an element?', options: ['padding', 'margin', 'border', 'gap'], correctAnswer: 1, explanation: 'Margin creates space outside an element', points: 10 },
+          { question: 'What does flexbox help with?', options: ['Organizing colors', 'Layout and alignment', 'Font styling', 'Animation'], correctAnswer: 1, explanation: 'Flexbox is used for flexible box layouts', points: 10 },
+        ],
+      },
+      {
+        title: 'Data Structures Basics Quiz',
+        course: courses[2]._id,
+        lesson: null,
+        difficulty: 'intermediate',
+        xpReward: 180,
+        pointsReward: 45,
+        timeLimit: 15,
+        passingScore: 65,
+        questions: [
+          { question: 'What is the time complexity of searching in an unsorted array?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], correctAnswer: 2, explanation: 'Unsorted arrays require linear search O(n)', points: 20 },
+          { question: 'Which data structure works on LIFO principle?', options: ['Queue', 'Stack', 'Array', 'LinkedList'], correctAnswer: 1, explanation: 'Stack follows Last In First Out (LIFO)', points: 20 },
+          { question: 'What is the space complexity of a binary search tree?', options: ['O(1)', 'O(log n)', 'O(n)', 'O(n²)'], correctAnswer: 2, explanation: 'BST space complexity is O(n) for n nodes', points: 20 },
+          { question: 'Which sorting algorithm has the best average case?', options: ['Bubble Sort', 'Insertion Sort', 'Merge Sort', 'Selection Sort'], correctAnswer: 2, explanation: 'Merge Sort has O(n log n) average case', points: 20 },
+        ],
+      },
+      {
+        title: 'Machine Learning Concepts Quiz',
+        course: courses[1]._id,
+        lesson: null,
+        difficulty: 'advanced',
+        xpReward: 250,
+        pointsReward: 60,
+        timeLimit: 20,
+        passingScore: 70,
+        questions: [
+          { question: 'What is supervised learning?', options: ['Learning without labels', 'Learning with labeled data', 'Learning from mistakes', 'Learning from features only'], correctAnswer: 1, explanation: 'Supervised learning uses labeled training data', points: 25 },
+          { question: 'What does overfitting mean?', options: ['Model fits training data too well', 'Model is too simple', 'Model learns general patterns', 'Model needs more data'], correctAnswer: 0, explanation: 'Overfitting occurs when a model memorizes training data too well', points: 25 },
+          { question: 'Which is NOT a supervised learning algorithm?', options: ['Linear Regression', 'K-Means', 'SVM', 'Decision Tree'], correctAnswer: 1, explanation: 'K-Means is an unsupervised clustering algorithm', points: 25 },
+          { question: 'What does cross-validation help prevent?', options: ['Underfitting', 'Overfitting', 'Data leakage', 'Overfitting and improper model evaluation'], correctAnswer: 3, explanation: 'Cross-validation prevents overfitting and ensures reliable evaluation', points: 25 },
         ],
       },
     ]);

@@ -11,7 +11,7 @@ const CourseCard = ({ course, isEnrolled = false, index = 0 }) => {
       className="card-hover group overflow-hidden"
     >
       {/* Thumbnail */}
-      <div className="relative h-36 bg-dark-900/80 rounded-xl mb-3 overflow-hidden">
+      <div className="relative h-36 bg-gray-900/80 rounded-xl mb-3 overflow-hidden">
         {course.thumbnail ? (
           <img src={course.thumbnail} alt={course.title} className="w-full h-full object-cover" />
         ) : (
@@ -31,10 +31,10 @@ const CourseCard = ({ course, isEnrolled = false, index = 0 }) => {
         </div>
       </div>
 
-      <h3 className="text-dark-100 font-semibold text-sm mb-1 group-hover:text-primary-400 transition-colors line-clamp-2">
+      <h3 className="text-gray-100 font-semibold text-sm mb-1 group-hover:text-indigo-400 transition-colors line-clamp-2">
         {course.title}
       </h3>
-      <p className="text-dark-400 text-xs mb-2 line-clamp-2">{course.description}</p>
+      <p className="text-gray-400 text-xs mb-2 line-clamp-2">{course.description}</p>
 
       {course.educator && (
         <div className="flex items-center gap-2 mb-2">
@@ -49,11 +49,11 @@ const CourseCard = ({ course, isEnrolled = false, index = 0 }) => {
         {course.duration > 0 && <span className="flex items-center gap-1"><Clock size={11} />{formatDuration(course.duration)}</span>}
       </div>
 
-      <div className="flex items-center justify-between pt-2 border-t border-dark-700">
-        <div className="flex items-center gap-1 text-xs text-primary-400">
+      <div className="flex items-center justify-between pt-2 border-t border-gray-700">
+        <div className="flex items-center gap-1 text-xs text-indigo-400">
           <Zap size={11} /> +{course.xpReward} XP
         </div>
-        <span className="text-xs text-dark-500 bg-dark-950 px-2 py-0.5 rounded">{course.category}</span>
+        <span className="text-xs text-dark-500 bg-gray-950 px-2 py-0.5 rounded">{course.category}</span>
       </div>
     </div>
   )

@@ -6,7 +6,7 @@ const BadgeCard = ({ badge, earned = false, index = 0 }) => {
 
   return (
     <div
-      className={`relative p-3 rounded-lg border transition-colors ${earned ? `${style.bg} ${style.border}` : 'bg-dark-800 border-dark-700 opacity-50 grayscale'}`}
+      className={`relative p-3 rounded-lg border transition-colors ${earned ? `${style.bg} ${style.border}` : 'bg-gray-800 border-gray-700 opacity-50 grayscale'}`}
     >
       {!earned && (
         <div className="absolute top-2 right-2">
@@ -24,7 +24,7 @@ const BadgeCard = ({ badge, earned = false, index = 0 }) => {
         </div>
 
         {earned && (
-          <div className="mt-1.5 flex justify-center gap-2 text-xs text-dark-400">
+          <div className="mt-1.5 flex justify-center gap-2 text-xs text-gray-400">
             <span>+{badge.xpReward} XP</span>
             <span>+{badge.pointsReward} pts</span>
           </div>

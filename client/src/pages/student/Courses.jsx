@@ -37,8 +37,8 @@ const Courses = () => {
   return (
     <div className="space-y-5 animate-in">
       <div>
-        <h1 className="text-xl font-bold text-dark-100">Courses</h1>
-        <p className="text-dark-400 text-sm mt-0.5">{total} courses available</p>
+        <h1 className="text-xl font-bold text-gray-100">Courses</h1>
+        <p className="text-gray-400 text-sm mt-0.5">{total} courses available</p>
       </div>
 
       {/* Filters */}
@@ -61,16 +61,16 @@ const Courses = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
           {[...Array(8)].map((_, i) => (
             <div key={i} className="card animate-pulse">
-              <div className="h-36 bg-dark-950 rounded-lg mb-3" />
-              <div className="h-4 bg-dark-950 rounded mb-2" />
-              <div className="h-3 bg-dark-950 rounded w-3/4" />
+              <div className="h-36 bg-gray-950 rounded-lg mb-3" />
+              <div className="h-4 bg-gray-950 rounded mb-2" />
+              <div className="h-3 bg-gray-950 rounded w-3/4" />
             </div>
           ))}
         </div>
       ) : filtered.length === 0 ? (
         <div className="text-center py-16">
           <BookOpen size={40} className="text-dark-500 mx-auto mb-3" />
-          <p className="text-dark-400">No courses found</p>
+          <p className="text-gray-400">No courses found</p>
           <p className="text-dark-500 text-sm mt-1">Try adjusting filters</p>
         </div>
       ) : (
@@ -84,7 +84,7 @@ const Courses = () => {
       {total > 12 && (
         <div className="flex justify-center gap-2">
           <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="btn-secondary py-1.5 px-3 text-sm">Prev</button>
-          <span className="flex items-center text-dark-400 text-sm">Page {page}</span>
+          <span className="flex items-center text-gray-400 text-sm">Page {page}</span>
           <button onClick={() => setPage(p => p + 1)} disabled={courses.length < 12} className="btn-secondary py-1.5 px-3 text-sm">Next</button>
         </div>
       )}

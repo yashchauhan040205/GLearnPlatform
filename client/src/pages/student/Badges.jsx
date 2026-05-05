@@ -22,8 +22,8 @@ const Badges = () => {
     <div className="space-y-5 animate-in">
       <div className="flex items-start justify-between">
         <div>
-          <h1 className="text-xl font-bold text-dark-100 flex items-center gap-2"><Award size={20} className="text-amber-500" />Badges</h1>
-          <p className="text-dark-400 text-sm mt-0.5">{earned.length} of {badges.length} earned</p>
+          <h1 className="text-xl font-bold text-gray-100 flex items-center gap-2"><Award size={20} className="text-amber-500" />Badges</h1>
+          <p className="text-gray-400 text-sm mt-0.5">{earned.length} of {badges.length} earned</p>
         </div>
         <div className="text-center">
           <div className="relative w-14 h-14">
@@ -34,7 +34,7 @@ const Badges = () => {
                 strokeLinecap="round" className="transition-all duration-1000" />
             </svg>
             <div className="absolute inset-0 flex items-center justify-center">
-              <span className="text-dark-100 font-semibold text-xs">{badges.length > 0 ? Math.round((earned.length / badges.length) * 100) : 0}%</span>
+              <span className="text-gray-100 font-semibold text-xs">{badges.length > 0 ? Math.round((earned.length / badges.length) * 100) : 0}%</span>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ const Badges = () => {
       {/* Filters */}
       <div className="flex gap-2">
         {[{ key: 'all', label: `All (${badges.length})` }, { key: 'earned', label: `Earned (${earned.length})` }, { key: 'locked', label: `Locked (${unearned.length})` }].map(({ key, label }) => (
-          <button key={key} onClick={() => setFilter(key)} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${filter === key ? 'bg-primary-600 text-white' : 'bg-dark-900 text-dark-400 hover:text-dark-100 border border-dark-800'}`}>
+          <button key={key} onClick={() => setFilter(key)} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-colors ${filter === key ? 'bg-indigo-600 text-white' : 'bg-gray-900 text-gray-400 hover:text-gray-100 border border-gray-800'}`}>
             {label}
           </button>
         ))}
@@ -55,7 +55,7 @@ const Badges = () => {
         if (!tierBadges.length) return null
         return (
           <div key={tier}>
-            <h2 className="text-dark-400 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
+            <h2 className="text-gray-400 text-xs font-semibold uppercase tracking-wider mb-2 flex items-center gap-2">
               {tier}
               <span className="text-dark-500">({tierBadges.filter(b => b.earned).length}/{tierBadges.length})</span>
             </h2>
@@ -68,7 +68,7 @@ const Badges = () => {
         )
       })}
 
-      {loading && <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">{[...Array(8)].map((_, i) => <div key={i} className="h-40 bg-dark-900 rounded-lg animate-pulse" />)}</div>}
+      {loading && <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">{[...Array(8)].map((_, i) => <div key={i} className="h-40 bg-gray-900 rounded-lg animate-pulse" />)}</div>}
     </div>
   )
 }
