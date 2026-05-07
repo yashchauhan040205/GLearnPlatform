@@ -2,9 +2,11 @@ import { io } from 'socket.io-client'
 
 let socket = null
 
+const socketUrl = import.meta.env.VITE_SOCKET_URL || window.location.origin
+
 export const initSocket = (userId) => {
   if (socket) return socket
-  socket = io(window.location.origin, {
+  socket = io(socketUrl, {
     withCredentials: true,
     transports: ['websocket', 'polling'],
   })

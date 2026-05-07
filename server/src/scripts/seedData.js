@@ -7,7 +7,9 @@ const Course = require('../models/Course');
 
 const seedData = async () => {
   try {
-    await mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/glearn');
+    await mongoose.connect(
+      process.env.MONGO_URI || process.env.MONGODB_URI || 'mongodb://localhost:27017/gamified_learning'
+    );
 
     // Create sample educator
     let educator = await User.findOne({ email: 'educator@example.com' });
