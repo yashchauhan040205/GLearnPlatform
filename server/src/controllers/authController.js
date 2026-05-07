@@ -33,7 +33,9 @@ const register = async (req, res) => {
     // Send verification email
     try {
       await sendVerificationEmail(user, verificationToken);
-    } catch (_) {}
+    } catch (error) {
+      console.warn('Failed to send verification email:', error?.message || error);
+    }
 
     const token = generateToken(user._id);
     res.status(201).json({

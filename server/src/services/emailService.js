@@ -16,21 +16,30 @@ const getClientUrl = () => {
   return 'http://localhost:3000';
 };
 
+const getSmtpCreds = () => {
+  const user = process.env.SMTP_USER || process.env.EMAIL_USER;
+  const pass = process.env.SMTP_PASS || process.env.EMAIL_PASSWORD;
+  return { user, pass };
+};
+
 const createTransporter = () => {
+  const { user, pass } = getSmtpCreds();
+  if (!user || !pass) {
+    throw new Error('Email is not configured (missing SMTP/EMAIL credentials)');
+  }
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST || process.env.EMAIL_HOST || 'smtp.gmail.com',
     port: process.env.SMTP_PORT || process.env.EMAIL_PORT || 587,
     secure: false,
     auth: {
-      user: process.env.SMTP_USER || process.env.EMAIL_USER,
-      pass: process.env.SMTP_PASS || process.env.EMAIL_PASSWORD
+      user,
+      pass,
     },
   });
 };
 
 const sendWelcomeEmail = async (user) => {
-  const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
-  if (!smtpUser) return;
+  const { user: smtpUser } = getSmtpCreds();
   const transporter = createTransporter();
   const clientUrl = getClientUrl();
   await transporter.sendMail({
@@ -57,8 +66,7 @@ const sendWelcomeEmail = async (user) => {
 };
 
 const sendBadgeEmail = async (user, badge) => {
-  const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
-  if (!smtpUser) return;
+  const { user: smtpUser } = getSmtpCreds();
   const transporter = createTransporter();
   await transporter.sendMail({
     from: `"GLearnPlatform" <${smtpUser}>`,
@@ -77,8 +85,7 @@ const sendBadgeEmail = async (user, badge) => {
 };
 
 const sendVerificationEmail = async (user, token) => {
-  const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
-  if (!smtpUser) return;
+  const { user: smtpUser } = getSmtpCreds();
   const transporter = createTransporter();
   const clientUrl = getClientUrl();
   const verificationUrl = `${clientUrl}/verify-email?token=${token}`;
