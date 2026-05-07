@@ -28,6 +28,23 @@ const publicRoutes = require('./routes/public');
 const app = express();
 const server = http.createServer(app);
 
+const normalizeOrigin = (value) => (value || '').trim().replace(/\/+$/, '');
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000')
+  .split(',')
+  .map(normalizeOrigin)
+  .filter(Boolean);
+
+const corsOptions = {
+  origin: (origin, callback) => {
+    // Allow non-browser clients (no Origin header)
+    if (!origin) return callback(null, true);
+    const normalized = normalizeOrigin(origin);
+    const isAllowed = allowedOrigins.includes(normalized);
+    return callback(null, isAllowed);
+  },
+  credentials: true,
+};
+
 // Connect to MongoDB
 connectDB();
 
@@ -44,10 +61,7 @@ const limiter = (req, res, next) => next(); // Pass through for now
 
 // Middleware
 app.use(helmet({ crossOriginResourcePolicy: false }));
-app.use(cors({
-  origin: process.env.CLIENT_URL || 'http://localhost:3000',
-  credentials: true,
-}));
+app.use(cors(corsOptions));
 app.use(morgan('dev'));
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));

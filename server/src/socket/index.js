@@ -2,10 +2,20 @@ const { Server } = require('socket.io');
 
 let io;
 
+const normalizeOrigin = (value) => (value || '').trim().replace(/\/+$/, '');
+const allowedOrigins = (process.env.CLIENT_URL || 'http://localhost:3000')
+  .split(',')
+  .map(normalizeOrigin)
+  .filter(Boolean);
+
 const initSocket = (server) => {
   io = new Server(server, {
     cors: {
-      origin: process.env.CLIENT_URL || 'http://localhost:3000',
+      origin: (origin, callback) => {
+        if (!origin) return callback(null, true);
+        const normalized = normalizeOrigin(origin);
+        return callback(null, allowedOrigins.includes(normalized));
+      },
       methods: ['GET', 'POST'],
       credentials: true,
     },
