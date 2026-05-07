@@ -1,5 +1,21 @@
 const nodemailer = require('nodemailer');
 
+const normalizeOrigin = (value) => (value || '').trim().replace(/\/+$/, '');
+
+const getClientUrl = () => {
+  const raw = process.env.CLIENT_URL || process.env.FRONTEND_URL || '';
+  // Support comma-separated list (same pattern as CORS config)
+  const first = raw.split(',')[0];
+  const normalized = normalizeOrigin(first);
+  if (normalized) return normalized;
+
+  // Fall back for local dev; in production this should be set
+  if ((process.env.NODE_ENV || '').toLowerCase() === 'production') {
+    console.warn('CLIENT_URL is not set; verification emails may contain localhost links.');
+  }
+  return 'http://localhost:3000';
+};
+
 const createTransporter = () => {
   return nodemailer.createTransport({
     host: process.env.SMTP_HOST || process.env.EMAIL_HOST || 'smtp.gmail.com',
@@ -16,6 +32,7 @@ const sendWelcomeEmail = async (user) => {
   const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
   if (!smtpUser) return;
   const transporter = createTransporter();
+  const clientUrl = getClientUrl();
   await transporter.sendMail({
     from: `"GLearnPlatform" <${smtpUser}>`,
     to: user.email,
@@ -30,7 +47,7 @@ const sendWelcomeEmail = async (user) => {
           <p>✨ XP: 0 | Level: 1 | Streak: 0 days</p>
         </div>
         <p style="text-align:center;margin-top:20px;">
-          <a href="${process.env.CLIENT_URL}" style="background:#6366f1;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">
+          <a href="${clientUrl}" style="background:#6366f1;color:white;padding:12px 24px;border-radius:8px;text-decoration:none;font-weight:bold;">
             Start Learning Now
           </a>
         </p>
@@ -63,7 +80,8 @@ const sendVerificationEmail = async (user, token) => {
   const smtpUser = process.env.SMTP_USER || process.env.EMAIL_USER;
   if (!smtpUser) return;
   const transporter = createTransporter();
-  const verificationUrl = `${process.env.CLIENT_URL}/verify-email?token=${token}`;
+  const clientUrl = getClientUrl();
+  const verificationUrl = `${clientUrl}/verify-email?token=${token}`;
 
   await transporter.sendMail({
     from: `"GLearnPlatform" <${smtpUser}>`,
