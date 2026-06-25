@@ -30,7 +30,7 @@ const userSchema = new mongoose.Schema({
   theme: { type: String, enum: ['light', 'dark'], default: 'dark' },
 
   isActive: { type: Boolean, default: true },
-  emailVerified: { type: Boolean, default: false },
+  emailVerified: { type: Boolean, default: true },
   emailVerificationToken: String,
   emailVerificationExpire: Date,
   resetPasswordToken: String,

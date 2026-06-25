@@ -6,7 +6,7 @@ const questionSchema = new mongoose.Schema({
   correctAnswer: { type: Number, required: true }, // index of correct option
   explanation: { type: String, default: '' },
   points: { type: Number, default: 10 },
-  difficulty: { type: String, enum: ['easy', 'medium', 'hard'], default: 'easy' },
+  difficulty: { type: String, enum: ['beginner', 'intermediate', 'advanced', 'easy', 'medium', 'hard'], default: 'beginner' },
 });
 
 const quizSchema = new mongoose.Schema({
@@ -21,7 +21,7 @@ const quizSchema = new mongoose.Schema({
   pointsReward: { type: Number, default: 50 },
   maxAttempts: { type: Number, default: 3 },
   isActive: { type: Boolean, default: true },
-  difficulty: { type: String, enum: ['easy', 'medium', 'hard'], default: 'easy' },
+  difficulty: { type: String, enum: ['beginner', 'intermediate', 'advanced', 'easy', 'medium', 'hard'], default: 'beginner' },
 }, { timestamps: true });
 
 module.exports = mongoose.model('Quiz', quizSchema);

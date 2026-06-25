@@ -22,7 +22,7 @@ const register = async (req, res) => {
       return res.status(400).json({ success: false, message: 'Email already registered' });
     }
     const safeRole = ['student', 'educator'].includes(role) ? role : 'student';
-    const user = await User.create({ name, email, password, role: safeRole, emailVerified: false });
+    const user = await User.create({ name, email, password, role: safeRole, emailVerified: true });
 
     // Generate email verification token
     const { token: verificationToken, hashedToken } = generateVerificationToken();

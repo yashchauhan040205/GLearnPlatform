@@ -1,4 +1,4 @@
-require('dotenv').config({ path: '../.env' });
+require('dotenv').config({ path: require('path').resolve(__dirname, '../.env') });
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const User = require('../src/models/User');
@@ -44,20 +44,19 @@ const seedDatabase = async () => {
     console.log(`✅ Seeded ${badges.length} badges`);
 
     // Seed users
-    const adminPass = await bcrypt.hash('admin123', 12);
-    const admin = await User.create({ name: 'Admin User', email: 'admin@glearnplatform.com', password: adminPass, role: 'admin', xp: 99999, level: 100, points: 50000 });
+    const admin = await User.create({ name: 'Admin User', email: 'admin@glearnplatform.com', password: 'admin123', role: 'admin', xp: 99999, level: 100, points: 50000, emailVerified: true });
 
     const educator = await User.create({
-      name: 'Dr. Sarah Johnson', email: 'educator@glearnplatform.com', password: await bcrypt.hash('educator123', 12),
-      role: 'educator', bio: 'Expert in Web Development and AI with 10+ years experience', xp: 15000, level: 16, points: 8000,
+      name: 'Dr. Sarah Johnson', email: 'educator@glearnplatform.com', password: 'educator123',
+      role: 'educator', bio: 'Expert in Web Development and AI with 10+ years experience', xp: 15000, level: 16, points: 8000, emailVerified: true,
     });
 
     const students = await User.insertMany([
-      { name: 'Alex Chen', email: 'alex@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 8500, level: 9, points: 4200, streak: 15, longestStreak: 22 },
-      { name: 'Maya Patel', email: 'maya@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 6200, level: 7, points: 3100, streak: 8, longestStreak: 14 },
-      { name: 'Jordan Kim', email: 'jordan@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 12000, level: 13, points: 6500, streak: 28, longestStreak: 35 },
-      { name: 'Riley Torres', email: 'riley@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 3400, level: 4, points: 1800, streak: 3, longestStreak: 7 },
-      { name: 'Sam Wilson', email: 'sam@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 18500, level: 19, points: 9200, streak: 45, longestStreak: 60 },
+      { name: 'Alex Chen', email: 'alex@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 8500, level: 9, points: 4200, streak: 15, longestStreak: 22, emailVerified: true },
+      { name: 'Maya Patel', email: 'maya@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 6200, level: 7, points: 3100, streak: 8, longestStreak: 14, emailVerified: true },
+      { name: 'Jordan Kim', email: 'jordan@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 12000, level: 13, points: 6500, streak: 28, longestStreak: 35, emailVerified: true },
+      { name: 'Riley Torres', email: 'riley@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 3400, level: 4, points: 1800, streak: 3, longestStreak: 7, emailVerified: true },
+      { name: 'Sam Wilson', email: 'sam@example.com', password: await bcrypt.hash('student123', 12), role: 'student', xp: 18500, level: 19, points: 9200, streak: 45, longestStreak: 60, emailVerified: true },
     ]);
     console.log(`✅ Seeded ${students.length + 2} users`);
 

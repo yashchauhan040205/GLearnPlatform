@@ -40,6 +40,9 @@ const corsOptions = {
     if (!origin) return callback(null, true);
     const normalized = normalizeOrigin(origin);
     const isAllowed = allowedOrigins.includes(normalized);
+    if (!isAllowed) {
+      console.warn(`[CORS Blocked] Request from origin "${origin}" is not in CLIENT_URL (allowedOrigins: ${JSON.stringify(allowedOrigins)}). Set CLIENT_URL on your server environment to fix.`);
+    }
     return callback(null, isAllowed);
   },
   credentials: true,
